@@ -3,6 +3,7 @@
 #ifndef JUEGO76_H_ 
 #define JUEGO76_H_
 #define _CRT_SECURE_NO_WARNINGS
+#pragma warning( disable : 4789 )
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
