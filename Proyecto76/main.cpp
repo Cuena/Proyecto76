@@ -2,6 +2,6 @@
 
 int main() {
 
-	IaGUI();
+	IaGUI(true); //true -> IA  |  false -> PvP
 	return 0;
 }
