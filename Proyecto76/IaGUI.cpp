@@ -47,7 +47,7 @@ void IaGUI::paintBoard() {
 }
 
 
-IaGUI::IaGUI()
+IaGUI::IaGUI(bool mode)
 {
 	
 	
@@ -183,7 +183,7 @@ IaGUI::IaGUI()
 	ggText.setCharacterSize(100);
 	ggText.setFillColor(sf::Color::Black);
 
-	//char grid[7][6];//SFML
+	//char grid[7][6];//SFML //SFML
 
 
 
@@ -208,20 +208,21 @@ IaGUI::IaGUI()
 			if (event.type == sf::Event::Closed)
 				window.close();
 			
-			if (event.type == sf::Event::TextEntered)
-			{
+			
 
-				if (event.text.unicode < 128)
-					//std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
-					text2.setString(event.text.unicode);
+			
+			
 
-			}
-			if (win == 0 && turn == '1' && go) {
-				int prueba = AIManager();
-				//printf("La prueba ha decidido que se meta en: %i", prueba);
-				meterFicha2("", player2char, prueba, 0);
-				//pintar2();
+			if (win == 0 && turn == '1' && go  && mode) {
 
+				
+					int prueba = AIManager();
+					//printf("La prueba ha decidido que se meta en: %i", prueba);
+					meterFicha2("", player2char, prueba, 0);
+					//pintar2();
+				
+			
+			
 				if (winCheckMapa(2) == 2) {
 					//printf("No eres un reto \n");
 					win = 2;
@@ -234,34 +235,44 @@ IaGUI::IaGUI()
 				if (event.key.code == sf::Keyboard::Enter)
 				{
 
-					std::string s = text2.getString();
-					int n = -1;
 					try
 					{
+						s = text2.getString();
+						n -= 1;
 						n = stoi(s);
 					}
 					catch (const std::exception&)
 					{
 
 					}
-					
+				
 					//meterFicha2("Player 2: ", player2char);
+					if (win == 0 && turn == '1' && n > 0 && n < 8 && go && !mode && llena(n) == 0)
+					{
 
+						meterFicha2("Player 1: ", player2char, n, 0);
+
+						//pintar2();
+
+
+						if (winCheckMapa(2) == 2) {
+							//printf("Has tenido suerte \n");
+							win = 2;
+						}
+						//paintBoard();
+						/*paintBoard();
+
+						changeTurn();*/
+						go = false;
+					}
 					
-					if (win == 0 && turn == '2' && n>0 && n<8 && go )
+					if (win == 0 && turn == '2' && n>0 && n<8 && go && llena(n) == 0)
 					{
 						
 						meterFicha2("Player 1: ", player1char, n, 0);
 
 						//pintar2();
 
-						
-						
-
-						pintar2();
-						
-						
-						
 						if (winCheckMapa(1) == 1) {
 							//printf("Has tenido suerte \n");
 							win = 1;
@@ -276,7 +287,7 @@ IaGUI::IaGUI()
 
 				}
 			}
-			else if (restart.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
+			if (restart.getGlobalBounds().contains(event.mouseButton.x, event.mouseButton.y))
 			{
 				crearMapa();
 				ggText.setString("");
@@ -287,6 +298,15 @@ IaGUI::IaGUI()
 				IaGUI::changeTurn();
 
 			}
+			if (event.type == sf::Event::TextEntered)
+			{
+
+				if (event.text.unicode < 128)
+					//std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
+					text2.setString(event.text.unicode);
+
+			}
+			
 		}
 
 	

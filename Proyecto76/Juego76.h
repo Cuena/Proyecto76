@@ -26,6 +26,8 @@ static char player2char = '2';
 static int PlayOut = 0;
 static int EVA = 0;
 static int ult[2] = { 0,0 };
+
+
 //funciones
 
 

@@ -23,12 +23,13 @@ protected:
 	sf::ContextSettings settings;
 	sf::RenderWindow window;
 
-	
+	int n;
+	std::string s = " ";
 	
 
 public: 
 
-	IaGUI();
+	IaGUI(bool mode);
 	void changeTurn();
 	void paintBoard();
 
