@@ -9,7 +9,7 @@
 
 
  
- char mapa[7][7];
+static char mapa[7][7];
 static char mapa2[7][7];
 static int move1;
 static int win;
@@ -30,6 +30,7 @@ static int ult[2] = { 0,0 };
 
 void crearMapa();
 void pintar2();
+char pintar3(char xd[7][7]);
 void meterFicha2(const char* player, char a, int col,int l);
 void buscarLibre2(char a);
 int llena(int a);

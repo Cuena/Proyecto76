@@ -20,9 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Juego76.c" />
+    <ClCompile Include="IaGUI.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="IaGUI.h" />
     <ClInclude Include="Juego76.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

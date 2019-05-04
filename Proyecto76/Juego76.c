@@ -38,6 +38,22 @@ void pintar2() {
 
 
 
+char pintar3(char xd[7][7]) {
+
+
+	for (int i = 0; i < 7; i++)
+	{
+		for (int j = 0; j < 7; j++)
+		{
+			
+			xd[i][j] = mapa[i][j];
+
+		}
+		
+	}
+	return xd;
+}
+
 
 
 
