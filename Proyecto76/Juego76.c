@@ -59,7 +59,6 @@ char pintar3(char xd[7][7]) {
 
 
 
-
 int winCheckMapa(int i) {
 
 
