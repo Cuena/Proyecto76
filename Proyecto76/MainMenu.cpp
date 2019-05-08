@@ -130,11 +130,3 @@ void MainMenu::drawMenuItems()
 }
 
 
-MainMenu::MainMenu()
-{
-}
-
-
-MainMenu::~MainMenu()
-{
-}

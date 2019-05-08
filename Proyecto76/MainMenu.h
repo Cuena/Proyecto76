@@ -25,11 +25,3 @@ public:
 	void drawMenuItems();
 
 };
-
-class MainMenu
-{
-public:
-	MainMenu();
-	~MainMenu();
-};
-
