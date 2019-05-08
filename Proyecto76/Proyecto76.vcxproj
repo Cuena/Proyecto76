@@ -24,11 +24,14 @@
     <ClCompile Include="IaGUI.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client2.h" />
     <ClInclude Include="IaGUI.h" />
     <ClInclude Include="Juego76.h" />
+    <ClInclude Include="Login.h" />
+    <ClInclude Include="MainMenu.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

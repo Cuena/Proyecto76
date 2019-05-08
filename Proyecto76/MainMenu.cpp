@@ -128,3 +128,13 @@ void MainMenu::drawMenuItems()
 	window.draw(menuQuitText);
 	window.draw(menuCircle);
 }
+
+
+MainMenu::MainMenu()
+{
+}
+
+
+MainMenu::~MainMenu()
+{
+}

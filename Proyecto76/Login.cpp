@@ -158,3 +158,12 @@ void Login::update() {
 	window.draw(inputPasswordText);
 
 }
+
+Login::Login()
+{
+}
+
+
+Login::~Login()
+{
+}

@@ -26,3 +26,10 @@ public:
 
 };
 
+class MainMenu
+{
+public:
+	MainMenu();
+	~MainMenu();
+};
+

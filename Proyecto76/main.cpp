@@ -1,5 +1,4 @@
 #include "IaGUI.h"#include "Client2.h"
-#include "Sfmlcon.h"
 #include "MainMenu.h"
 #include "Login.h"
 

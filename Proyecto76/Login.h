@@ -27,3 +27,10 @@ public:
 
 };
 
+class Login
+{
+public:
+	Login();
+	~Login();
+};
+
