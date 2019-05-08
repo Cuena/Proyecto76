@@ -18,23 +18,22 @@
     <ClCompile Include="Juego76.c">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-	<ClCompile Include="Login.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-	
     <ClCompile Include="IaGUI.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-	<ClCompile Include="Login.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
-	<ClCompile Include="MainMenu.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
     <ClCompile Include="Client2.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="Login.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="prueba.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>
@@ -48,10 +47,13 @@
     <ClInclude Include="Client2.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-<ClInclude Include="Login.h">
+    <ClInclude Include="MainMenu.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-<ClInclude Include="MainMenu.h">
+    <ClInclude Include="Login.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="prueba.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

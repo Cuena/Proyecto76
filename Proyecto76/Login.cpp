@@ -7,13 +7,13 @@ Login::Login()
 {
 	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
 
-	
+
 	if (!font.loadFromFile("SaucerBB.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
 	}
-	
+
 	drawLoginItems();
 
 	while (window.isOpen()) {
@@ -29,21 +29,23 @@ Login::Login()
 			case sf::Event::TextEntered:
 
 				if (event.text.unicode == '\b') {
-					if (selectedLoginItem == 0 && userString.getSize()>0) {
+					if (selectedLoginItem == 0 && userString.getSize() > 0) {
 
-						try { userString.erase(userString.getSize() - 1, 1);
-						inputUserText.setString(userString);
+						try {
+							userString.erase(userString.getSize() - 1, 1);
+							inputUserText.setString(userString);
 						}
-						catch(int e){}
-						
+						catch (int e) {}
+
 					}
 					else if (selectedLoginItem == 1 && passwordString.getSize() > 0) {
 
-						try {passwordString.erase(passwordString.getSize() - 1, 1);
-						inputPasswordText.setString(passwordString);
+						try {
+							passwordString.erase(passwordString.getSize() - 1, 1);
+							inputPasswordText.setString(passwordString);
 						}
 						catch (int e) {}
-						
+
 					}
 
 				}
@@ -59,7 +61,7 @@ Login::Login()
 					}
 				}
 				break;
-			
+
 			case sf::Event::KeyPressed:
 				switch (event.key.code) {
 				case sf::Keyboard::Up:
@@ -72,7 +74,7 @@ Login::Login()
 					//login
 					window.close();
 					MainMenu();
-					
+
 					break;
 				case sf::Keyboard::Down:
 					if (selectedLoginItem < 1) {
@@ -89,7 +91,7 @@ Login::Login()
 			}
 
 
-			
+
 		}
 
 		if (selectedLoginItem == 0) {
@@ -103,7 +105,7 @@ Login::Login()
 			passwordText.setOutlineThickness(5);
 			userText.setOutlineThickness(0);
 		}
-	
+
 		window.clear();
 
 		update();
@@ -145,7 +147,7 @@ void Login::drawLoginItems()
 	inputPasswordText.setPosition(window.getSize().x / 2.0f - 10 + 50, window.getSize().y / 2.0f);
 
 
-	
+
 }
 
 void Login::update() {
@@ -158,3 +160,4 @@ void Login::update() {
 	window.draw(inputPasswordText);
 
 }
+
