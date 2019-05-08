@@ -22,6 +22,7 @@
     <ClCompile Include="Client2.cpp" />
     <ClCompile Include="Juego76.c" />
     <ClCompile Include="IaGUI.cpp" />
+    <ClCompile Include="Login.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
