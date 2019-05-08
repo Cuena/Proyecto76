@@ -12,6 +12,7 @@ extern "C" {
 class IaGUI
 {
 protected:
+
 	int WIDTH = 800;
 	int HEIGHT = 800;
 	char turn = '1';
@@ -22,6 +23,13 @@ protected:
 	sf::CircleShape circle, turnCircle;
 	sf::ContextSettings settings;
 	sf::RenderWindow window;
+	sf::RectangleShape board, scoreboard, panel, rectWin,restart;
+	sf::Font font;
+	sf::Text text, turnText, text2, score1, score2, ggText, restartText, p1Text, p2Text;
+
+	
+
+	sf::String player1,player2;
 
 	int n;
 	std::string s = " ";
@@ -32,7 +40,8 @@ public:
 	IaGUI(bool mode);
 	void changeTurn();
 	void paintBoard();
-
+	void updateGUI();
+	void initGUI();
 
 
 

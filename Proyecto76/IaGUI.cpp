@@ -46,6 +46,138 @@ void IaGUI::paintBoard() {
 	
 }
 
+void IaGUI::updateGUI()
+{
+
+}
+
+void IaGUI::initGUI()
+{
+	//sf::RectangleShape board(sf::Vector2f(800, 800));
+	board.setSize(sf::Vector2f(800, 800));
+	board.setFillColor(sf::Color(150, 150, 255));
+	board.setOutlineColor(sf::Color::Black);
+	board.setOutlineThickness(5);
+	board.setPosition(0, 200);
+
+	//sf::RectangleShape scoreboard(sf::Vector2f(1000, 200));
+	scoreboard.setSize(sf::Vector2f(1000, 200));
+	scoreboard.setFillColor(sf::Color(54, 86, 124));
+	scoreboard.setOutlineColor(sf::Color::Black);
+	scoreboard.setOutlineThickness(5);
+	scoreboard.setPosition(0, 0);
+
+
+	//sf::RectangleShape panel(sf::Vector2f(400, 1000));
+	panel.setSize(sf::Vector2f(400, 1000));
+	panel.setFillColor(sf::Color(54, 86, 124));
+	panel.setOutlineColor(sf::Color::Black);
+	panel.setOutlineThickness(5);
+	panel.setPosition(800, 000);
+
+
+
+	//sf::Text text;
+	text.setFont(font);
+	text.setString("NUMERO DE COLUMNA");
+	text.setCharacterSize(18); // in pixels, not points!
+	text.setFillColor(sf::Color::White);
+	text.setStyle(sf::Text::Bold);
+	text.setPosition(882, 600);
+
+	//sf::Text turnText;
+	turnText.setFont(font);
+	turnText.setString("TURNO");
+	turnText.setCharacterSize(18); // in pixels, not points!
+	turnText.setFillColor(sf::Color::White);
+	turnText.setStyle(sf::Text::Bold);
+	turnText.setPosition(950, 350);
+
+	//sf::Text text2;
+	text2.setFont(font);
+	text2.setString(" ");
+	text2.setCharacterSize(30); // in pixels, not points!
+	text2.setFillColor(sf::Color::White);
+	text2.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	text2.setPosition(1000, 650);
+
+	//sf::Text score1;
+	score1.setFont(font);
+	score1.setString(" ");
+	score1.setCharacterSize(50); // in pixels, not points!
+	score1.setFillColor(sf::Color::Blue);
+	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	score1.setPosition(350, 100);
+	score1.setString(std::to_string(twoscore));
+
+	//sf::Text score2;
+	score2.setFont(font);
+	score2.setString(" ");
+	score2.setCharacterSize(50); // in pixels, not points!
+	score2.setFillColor(sf::Color::Yellow);
+	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
+	score2.setPosition(450, 100);
+	score2.setString(std::to_string(onescore));
+
+
+	circle.setRadius(38);
+	circle.setPointCount(300);
+	circle.setOutlineThickness(-3);
+	circle.setOutlineColor(sf::Color::Black);
+
+
+	turnCircle.setRadius(38);
+	turnCircle.setPointCount(300);
+	turnCircle.setOutlineThickness(-3);
+	turnCircle.setOutlineColor(sf::Color::Black);
+	turnCircle.setPosition(950, 400);
+
+	//sf::RectangleShape restart(sf::Vector2f(175, 50));
+	restart.setSize(sf::Vector2f(175, 50));
+	restart.setFillColor(sf::Color(255, 150, 0));
+	restart.setPosition(920, 850);
+	restart.setOutlineColor(sf::Color::Black);
+	restart.setOutlineThickness(1);
+
+	//sf::Text restartText;
+	restartText.setFont(font);
+	restartText.setString("Restart");
+	restartText.setCharacterSize(35);
+	//restartText.setColor(sf::Color::Black);
+	restartText.setPosition(940, 850);
+
+
+	//	/*sf::RectangleShape overlay(sf::Vector2f(630, 630));
+	//	overlay.setFillColor(sf::Color(150, 150, 150, 150));
+	//*/
+	//sf::Text ggText;
+	ggText.setFont(font);
+	ggText.setCharacterSize(150);
+	ggText.setOutlineColor(sf::Color::Magenta);
+	ggText.setOutlineThickness(10);
+	ggText.setFillColor(sf::Color::Black);
+
+	/*rectWin.setSize(sf::Vector2f(700, 200));
+	rectWin.setFillColor(sf::Color(54, 86, 124));
+	rectWin.setOutlineColor(sf::Color::Black);
+	rectWin.setOutlineThickness(5);
+	rectWin.setPosition(200, 000);*/
+	p1Text.setFont(font);
+	p1Text.setString(player1);
+	p1Text.setCharacterSize(32); // in pixels, not points!
+	p1Text.setFillColor(sf::Color::White);
+	p1Text.setStyle(sf::Text::Bold);
+	p1Text.setPosition(70, 85);
+
+	p2Text.setFont(font);
+	p2Text.setString(player2);
+	p2Text.setCharacterSize(32); // in pixels, not points!
+	p2Text.setFillColor(sf::Color::White);
+	p2Text.setStyle(sf::Text::Bold);
+	p2Text.setPosition(550, 85);
+
+}
+
 
 IaGUI::IaGUI(bool mode)
 {
@@ -62,7 +194,8 @@ IaGUI::IaGUI(bool mode)
 	//}
 
 	
-
+	player1 = "PLAYER 1";
+	player2 = "PLAYER 2";
 	int moveCount = 0;
 
 	char str[3];
@@ -80,7 +213,7 @@ IaGUI::IaGUI(bool mode)
 	//sf::RectangleShape background(sf::Vector2f(800, 800));
 	//background.setFillColor(sf::Color(238, 38, 38));
 
-	sf::Font font;
+	//sf::Font font;
 	if (!font.loadFromFile("SaucerBB.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
@@ -88,100 +221,8 @@ IaGUI::IaGUI(bool mode)
 	}
 
 
-	sf::RectangleShape board(sf::Vector2f(800, 800));
-	board.setFillColor(sf::Color(150, 150, 255));
-	board.setOutlineColor(sf::Color::Black);
-	board.setOutlineThickness(5);
-	board.setPosition(0, 200);
-
-	sf::RectangleShape scoreboard(sf::Vector2f(1000, 200));
-	scoreboard.setFillColor(sf::Color(54, 86, 124));
-	scoreboard.setOutlineColor(sf::Color::Black);
-	scoreboard.setOutlineThickness(5);
-	scoreboard.setPosition(0, 0);
 	
-
-	sf::RectangleShape panel(sf::Vector2f(400, 1000));
-	panel.setFillColor(sf::Color(54, 86, 124));
-	panel.setOutlineColor(sf::Color::Black);
-	panel.setOutlineThickness(5);
-	panel.setPosition(800, 000);
-
-	sf::Text text;
-	text.setFont(font);
-	text.setString("NUMERO DE COLUMNA");
-	text.setCharacterSize(18); // in pixels, not points!
-	text.setFillColor(sf::Color::White);
-	text.setStyle(sf::Text::Bold);
-	text.setPosition(882, 600);
-
-	sf::Text turnText;
-	turnText.setFont(font);
-	turnText.setString("TURNO");
-	turnText.setCharacterSize(18); // in pixels, not points!
-	turnText.setFillColor(sf::Color::White);
-	turnText.setStyle(sf::Text::Bold);
-	turnText.setPosition(950, 350);
-
-	sf::Text text2;
-	text2.setFont(font);
-	text2.setString(" ");
-	text2.setCharacterSize(30); // in pixels, not points!
-	text2.setFillColor(sf::Color::White);
-	text2.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	text2.setPosition(1000, 650);
-
-	sf::Text score1;
-	score1.setFont(font);
-	score1.setString(" ");
-	score1.setCharacterSize(50); // in pixels, not points!
-	score1.setFillColor(sf::Color::Blue);
-	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score1.setPosition(350, 100);
-	score1.setString(std::to_string(twoscore));
-
-	sf::Text score2;
-	score2.setFont(font);
-	score2.setString(" ");
-	score2.setCharacterSize(50); // in pixels, not points!
-	score2.setFillColor(sf::Color::Yellow);
-	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score2.setPosition(450, 100);
-	score2.setString(std::to_string(onescore));
-
-	
-	circle.setRadius(38);
-	circle.setPointCount(300);
-	circle.setOutlineThickness(-3);
-	circle.setOutlineColor(sf::Color::Black);
-
-	
-	turnCircle.setRadius(38);
-	turnCircle.setPointCount(300);
-	turnCircle.setOutlineThickness(-3);
-	turnCircle.setOutlineColor(sf::Color::Black);
-	turnCircle.setPosition(950,400);
-
-	sf::RectangleShape restart(sf::Vector2f(175, 50));
-	restart.setFillColor(sf::Color(255, 150, 0));
-	restart.setPosition(920, 850);
-	restart.setOutlineColor(sf::Color::Black);
-	restart.setOutlineThickness(1);
-	sf::Text restartText;
-	restartText.setFont(font);
-	restartText.setString("Restart");
-	restartText.setCharacterSize(35);
-	//restartText.setColor(sf::Color::Black);
-	restartText.setPosition(940, 850);
-
-
-	//	/*sf::RectangleShape overlay(sf::Vector2f(630, 630));
-	//	overlay.setFillColor(sf::Color(150, 150, 150, 150));
-	//*/
-	sf::Text ggText;
-	ggText.setFont(font);
-	ggText.setCharacterSize(100);
-	ggText.setFillColor(sf::Color::Black);
+	initGUI();
 
 	//char grid[7][6];//SFML //SFML
 
@@ -318,7 +359,7 @@ IaGUI::IaGUI(bool mode)
 
 					//overlay.setFillColor(sf::Color(255, 0, 0, 150));
 					ggText.setString("Blue Wins!");
-					ggText.setPosition(90,0 );
+					ggText.setPosition(100,400 );
 					onescore++;
 					score1.setString(std::to_string(onescore));
 					//std::cout << onescore << "\n";
@@ -332,7 +373,7 @@ IaGUI::IaGUI(bool mode)
 					
 					//overlay.setFillColor(sf::Color(255, 255, 0, 150));
 					ggText.setString("Yellow Wins!");
-					ggText.setPosition(90, 0);
+					ggText.setPosition(100, 400);
 					twoscore++;
 					score2.setString(std::to_string(twoscore));
 					added = true;
@@ -362,30 +403,32 @@ IaGUI::IaGUI(bool mode)
 			go = true;
 		}
 
+	
 		window.clear();
 		window.draw(scoreboard);
 		window.draw(panel);
 		//window.draw(background);
 		window.draw(board);
-		
+
 		window.draw(text);
 		window.draw(text2);
 		//window.draw(overlay);
 		window.draw(ggText);
-		
+
 		window.draw(score1);
 		window.draw(score2);
 		window.draw(restart);
 		window.draw(restartText);
-		window.draw(ggText);
+		
 		window.draw(turnText);
 		window.draw(turnCircle);
-		
+
 
 		IaGUI::paintBoard();
+		window.draw(ggText);
 
-
-
+		window.draw(p1Text);
+		window.draw(p2Text);
 		window.display();
 	
 	}
