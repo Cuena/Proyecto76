@@ -3,6 +3,11 @@ using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+#include "onlineGUI.h"
+#include "Client2.h"
+#include <thread>
+#include <iostream>
+#include <cstdlib>
 
 class MainMenu
 {
@@ -19,9 +24,16 @@ public:
 	sf::Text menuTitle;
 	sf::Text menuPlayText;
 	sf::Text menuPlayIAText;
+	sf::Text menuPlayOnlineText;
 	sf::Text menuOptionsText;
 	sf::Text menuQuitText;
 
+	sf::Texture backTexture;
+	sf::Sprite backSprite;
+
+
+
 	void drawMenuItems();
 
+	
 };

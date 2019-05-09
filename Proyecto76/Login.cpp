@@ -1,11 +1,12 @@
 #include "Login.h"
 #include "MainMenu.h"
+#include "BD.h"
 
 
 
 Login::Login()
 {
-	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
+	window.create(sf::VideoMode(700, 800), "Connect 4", sf::Style::Close);
 
 
 	if (!font.loadFromFile("SaucerBB.ttf"))
@@ -51,11 +52,11 @@ Login::Login()
 				}
 				else if (event.text.unicode < 128)
 				{
-					if (selectedLoginItem == 0) {
+					if (selectedLoginItem == 0 && userString.getSize()<10) {
 						userString += event.text.unicode;
 						inputUserText.setString(userString);
 					}
-					else if (selectedLoginItem == 1) {
+					else if (selectedLoginItem == 1 && passwordString.getSize()<10) {
 						passwordString += event.text.unicode;
 						inputPasswordText.setString(passwordString);
 					}
@@ -72,6 +73,7 @@ Login::Login()
 					break;
 				case sf::Keyboard::Enter:
 					//login
+
 					window.close();
 					MainMenu();
 
@@ -124,7 +126,7 @@ void Login::drawLoginItems()
 	loginTitle.setFont(font);
 	loginTitle.setString("LOGIN");
 	loginTitle.setCharacterSize(70);
-	loginTitle.setPosition(window.getSize().x / 2.0f - loginTitle.getLocalBounds().width / 2.0f - 5, 200);
+	loginTitle.setPosition(window.getSize().x / 2.0f - loginTitle.getLocalBounds().width / 2.0f - 5, 100);
 
 	userText.setFont(font);
 	userText.setString("Username: ");

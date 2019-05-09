@@ -55,14 +55,14 @@ void IaGUI::initGUI()
 {
 	//sf::RectangleShape board(sf::Vector2f(800, 800));
 	board.setSize(sf::Vector2f(800, 800));
-	board.setFillColor(sf::Color(150, 150, 255));
+	board.setFillColor(sf::Color(250, 150, 255));
 	board.setOutlineColor(sf::Color::Black);
 	board.setOutlineThickness(5);
 	board.setPosition(0, 200);
 
 	//sf::RectangleShape scoreboard(sf::Vector2f(1000, 200));
-	scoreboard.setSize(sf::Vector2f(1000, 200));
-	scoreboard.setFillColor(sf::Color(54, 86, 124));
+	scoreboard.setSize(sf::Vector2f(800, 200));
+	scoreboard.setFillColor(sf::Color(154, 86, 124));
 	scoreboard.setOutlineColor(sf::Color::Black);
 	scoreboard.setOutlineThickness(5);
 	scoreboard.setPosition(0, 0);
@@ -107,7 +107,7 @@ void IaGUI::initGUI()
 	score1.setCharacterSize(50); // in pixels, not points!
 	score1.setFillColor(sf::Color::Blue);
 	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score1.setPosition(350, 100);
+	score1.setPosition(330, 70);
 	score1.setString(std::to_string(twoscore));
 
 	//sf::Text score2;
@@ -116,7 +116,7 @@ void IaGUI::initGUI()
 	score2.setCharacterSize(50); // in pixels, not points!
 	score2.setFillColor(sf::Color::Yellow);
 	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score2.setPosition(450, 100);
+	score2.setPosition(430, 70);
 	score2.setString(std::to_string(onescore));
 
 
@@ -175,6 +175,22 @@ void IaGUI::initGUI()
 	p2Text.setFillColor(sf::Color::White);
 	p2Text.setStyle(sf::Text::Bold);
 	p2Text.setPosition(550, 85);
+
+	columnsText.setFont(font);
+	columnsText.setString("1          2           3           4          5           6          7");
+	columnsText.setCharacterSize(32);
+	columnsText.setFillColor(sf::Color::White);
+	columnsText.setStyle(sf::Text::Bold);
+	columnsText.setPosition(50, 155);
+
+	if (!texture.loadFromFile("Mob0.png"))
+	{
+		// error...
+	}
+	texture.setSmooth(true);
+	sprite.setTexture(texture);
+	sprite.setPosition(950, 90);
+	sprite.setScale(sf::Vector2f(4.f, 4.f));
 
 }
 
@@ -405,11 +421,11 @@ IaGUI::IaGUI(bool mode)
 
 	
 		window.clear();
-		window.draw(scoreboard);
+		
 		window.draw(panel);
 		//window.draw(background);
 		window.draw(board);
-
+		window.draw(scoreboard);
 		window.draw(text);
 		window.draw(text2);
 		//window.draw(overlay);
@@ -422,6 +438,7 @@ IaGUI::IaGUI(bool mode)
 		
 		window.draw(turnText);
 		window.draw(turnCircle);
+		window.draw(columnsText);
 
 
 		IaGUI::paintBoard();
@@ -429,6 +446,8 @@ IaGUI::IaGUI(bool mode)
 
 		window.draw(p1Text);
 		window.draw(p2Text);
+
+		window.draw(sprite);
 		window.display();
 	
 	}

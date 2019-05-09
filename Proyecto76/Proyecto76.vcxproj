@@ -19,21 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BD.cpp" />
     <ClCompile Include="Client2.cpp" />
     <ClCompile Include="Juego76.c" />
     <ClCompile Include="IaGUI.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="onlineGUI.cpp" />
     <ClCompile Include="prueba.cpp" />
+    <ClCompile Include="sqlite3.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BD.h" />
     <ClInclude Include="Client2.h" />
     <ClInclude Include="IaGUI.h" />
     <ClInclude Include="Juego76.h" />
     <ClInclude Include="Login.h" />
     <ClInclude Include="MainMenu.h" />
+    <ClInclude Include="onlineGUI.h" />
     <ClInclude Include="prueba.h" />
+    <ClInclude Include="sqlite3.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
