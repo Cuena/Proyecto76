@@ -8,6 +8,6 @@ int main() {
 	//IaGUI(true); //true -> IA  |  false -> PvP
 	//MainMenu();
 	//Login();
-	Client2();
+	Login();
 	return 0;
 }
