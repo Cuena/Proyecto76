@@ -10,10 +10,22 @@ Client2::Client2()
 	connectServer();
 
 	int pri = 1;
+
+	std::cout << "antes\n";
+
+	
+
+	std::cout << "despues\n";
+	
+
+
 	auto f = [](SOCKET sock, char buf[4096], char* jugador, bool* toca) {
 
-		int pri = 1;
+	int pri = 1;
 		
+
+
+
 		while (true) {
 
 			int bytesRecieved = recv(sock, buf, 4096, 0);
@@ -54,6 +66,7 @@ Client2::Client2()
 						*toca = true;
 					}
 					pintar2();
+					
 
 					if (winCheckMapa(1) == 1) {
 
@@ -74,6 +87,8 @@ Client2::Client2()
 
 
 			}
+
+
 		}
 
 	};
@@ -84,10 +99,11 @@ Client2::Client2()
 
 	std::thread t{ f,sock,buf,jugador,toca };
 	//int bytesRecieved = recv(sock, buf, 4096, 0);
-
+	
 	crearMapa();
 	pintar2();
-
+	
+	
 	//if (bytesRecieved > 0) {
 
 	//	//Echo response to console

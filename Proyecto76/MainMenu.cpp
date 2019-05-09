@@ -1,6 +1,15 @@
 #include "MainMenu.h"
 #include "IaGUI.h"
 
+void runOnlineGUI()
+{
+	onlineGUI();
+}
+
+void runOnlineCMD()
+{
+	Client2();
+}
 
 
 MainMenu::MainMenu()
@@ -52,11 +61,18 @@ MainMenu::MainMenu()
 					else if (selectedMenuItem == 1) {
 						IaGUI(true);
 					}
+					else if (selectedMenuItem == 2) {
+						thread t1(runOnlineCMD);
+						thread t2(runOnlineGUI);
+
+						t1.join();
+						t2.join();
+					}
 
 					break;
 
 				case sf::Keyboard::Down:
-					if (selectedMenuItem < 3) {
+					if (selectedMenuItem < 4) {
 						selectedMenuItem++;
 						menuCircle.setPosition(menuCircle.getPosition().x, menuCircle.getPosition().y + 100);
 					}
@@ -111,22 +127,40 @@ void MainMenu::drawMenuItems()
 	menuPlayIAText.setCharacterSize(40);
 	menuPlayIAText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
 
+	menuPlayOnlineText.setFont(font);
+	menuPlayOnlineText.setString("play online");
+	menuPlayOnlineText.setCharacterSize(40);
+	menuPlayOnlineText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 100);
+
 	menuOptionsText.setFont(font);
 	menuOptionsText.setString("options");
 	menuOptionsText.setCharacterSize(40);
-	menuOptionsText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 100);
+	menuOptionsText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 200);
 
 	menuQuitText.setFont(font);
 	menuQuitText.setString("quit");
 	menuQuitText.setCharacterSize(40);
-	menuQuitText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 200);
+	menuQuitText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 300);
 
+
+	if (!backTexture.loadFromFile("background.jpg"))
+	{
+		// error...
+	}
+	backTexture.setSmooth(true);
+	backSprite.setTexture(backTexture);
+	backSprite.setPosition(0,0);
+	//backSprite.setScale(sf::Vector2f(2.f, 2.f));
+
+	window.draw(backSprite);
 	window.draw(menuTitle);
 	window.draw(menuPlayText);
 	window.draw(menuOptionsText);
 	window.draw(menuPlayIAText);
+	window.draw(menuPlayOnlineText);
 	window.draw(menuQuitText);
 	window.draw(menuCircle);
 }
+
 
 

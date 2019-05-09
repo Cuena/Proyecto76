@@ -25,8 +25,10 @@ protected:
 	sf::RenderWindow window;
 	sf::RectangleShape board, scoreboard, panel, rectWin,restart;
 	sf::Font font;
-	sf::Text text, turnText, text2, score1, score2, ggText, restartText, p1Text, p2Text;
+	sf::Text text, turnText, text2, score1, score2, ggText, restartText, p1Text, p2Text, columnsText;
 
+	sf::Texture texture;
+	sf::Sprite sprite;
 	
 
 	sf::String player1,player2;

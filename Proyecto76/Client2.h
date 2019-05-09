@@ -1,4 +1,5 @@
 #pragma once
+#include "onlineGUI.h"
 #include <WS2tcpip.h>
 #include <thread>
 extern "C" {
@@ -7,6 +8,9 @@ extern "C" {
 #include <string>
 #include <iostream>
 #include <sstream>
+
+
+
 #pragma comment (lib, "ws2_32.lib")
 
 class Client2
@@ -24,10 +28,13 @@ private:
 	bool toca2=false;
 	bool* toca=&toca2;
 
+
+
 public:
 	Client2();
 	void winSockInit();
 	void connectServer();
+	
 	
 
 	~Client2();
