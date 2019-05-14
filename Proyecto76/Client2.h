@@ -1,5 +1,6 @@
 #pragma once
 #include "onlineGUI.h"
+#include "MainMenu.h"
 #include <WS2tcpip.h>
 #include <thread>
 extern "C" {
@@ -27,14 +28,16 @@ private:
 	char* jugador;
 	bool toca2=false;
 	bool* toca=&toca2;
-
-
+	bool fin2 = true;
+	bool* fin = &fin2;
+	
 
 public:
+	
 	Client2();
 	void winSockInit();
 	void connectServer();
-	
+	void update();
 	
 
 	~Client2();
