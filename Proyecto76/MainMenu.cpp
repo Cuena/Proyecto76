@@ -34,7 +34,7 @@ MainMenu::MainMenu()
 	menuCircle.setOutlineThickness(-3);
 	menuCircle.setOutlineColor(sf::Color::Black);
 
-	menuCircle.setPosition(window.getSize().x / 2 - 80 - 100, window.getSize().y / 2 - 85);
+	menuCircle.setPosition(window.getSize().x / 2 - 110 - 100, window.getSize().y / 2 - 100);
 	//menuCircle.setPosition(screenWidth / 2 - getSize().x / 2, screenHeight / 2 - getSize().y / 2);
 	while (window.isOpen()) {
 		sf::Event event;
@@ -63,11 +63,12 @@ MainMenu::MainMenu()
 						IaGUI(true);
 					}
 					else if (selectedMenuItem == 2) {
+						
 						thread t1(runOnlineCMD);
 						thread t2(runOnlineGUI);
-
-						t1.join();
-						t2.join();
+						t1.detach();
+						t2.detach();
+						
 					}
 					else if (selectedMenuItem == 3) {
 						Options();
@@ -110,44 +111,58 @@ MainMenu::~MainMenu()
 
 void MainMenu::drawMenuItems()
 {
+	col = rand() % 4 -4;
 	sf::Font font;
-	if (!font.loadFromFile("SaucerBB.ttf"))
+	if (!font.loadFromFile("Pixeled.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
 	}
+	sf::Vertex line[] =
+	{
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 75)),
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5)+560, 75))
+	};
+
+	sf::Vertex line2[] =
+	{
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 180)),
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5) + 560, 180))
+	};
+
+
 	menuTitle.setFont(font);
 	menuTitle.setString("PROJECT 76");
-	menuTitle.setCharacterSize(70);
-	menuTitle.setPosition(window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5, 100);
+	menuTitle.setCharacterSize(60);
+	menuTitle.setPosition((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 100);
 
 	menuPlayText.setFont(font);
-	menuPlayText.setString("play vs player");
-	menuPlayText.setCharacterSize(40);
-	menuPlayText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f - 100);
+	menuPlayText.setString("PLAY VS PLAYER");
+	menuPlayText.setCharacterSize(30);
+	menuPlayText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f - 100);
 
 	menuPlayIAText.setFont(font);
-	menuPlayIAText.setString("play vs IA");
-	menuPlayIAText.setCharacterSize(40);
-	menuPlayIAText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
+	menuPlayIAText.setString("PLAY VS IA");
+	menuPlayIAText.setCharacterSize(30);
+	menuPlayIAText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f);
 
 	menuPlayOnlineText.setFont(font);
-	menuPlayOnlineText.setString("play online");
-	menuPlayOnlineText.setCharacterSize(40);
-	menuPlayOnlineText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 100);
+	menuPlayOnlineText.setString("PLAY ONLINE");
+	menuPlayOnlineText.setCharacterSize(30);
+	menuPlayOnlineText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 100);
 
 	menuOptionsText.setFont(font);
-	menuOptionsText.setString("options");
-	menuOptionsText.setCharacterSize(40);
-	menuOptionsText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 200);
+	menuOptionsText.setString("OPTIONS");
+	menuOptionsText.setCharacterSize(30);
+	menuOptionsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 200);
 
 	menuQuitText.setFont(font);
-	menuQuitText.setString("quit");
-	menuQuitText.setCharacterSize(40);
-	menuQuitText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 300);
+	menuQuitText.setString("QUIT");
+	menuQuitText.setCharacterSize(30);
+	menuQuitText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 300);
 
 
-	if (!backTexture.loadFromFile("background.jpg"))
+	if (!backTexture.loadFromFile("Black.jpg"))
 	{
 		// error...
 	}
@@ -155,8 +170,10 @@ void MainMenu::drawMenuItems()
 	backSprite.setTexture(backTexture);
 	backSprite.setPosition(0,0);
 	//backSprite.setScale(sf::Vector2f(2.f, 2.f));
-
+	
 	window.draw(backSprite);
+	window.draw(line, 2, sf::Lines);
+	window.draw(line2, 2, sf::Lines);
 	window.draw(menuTitle);
 	window.draw(menuPlayText);
 	window.draw(menuOptionsText);

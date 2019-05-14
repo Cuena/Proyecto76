@@ -18,7 +18,7 @@ public:
 	virtual ~MainMenu();
 
 	int selectedMenuItem = 0;
-
+	int col = 0;
 	sf::CircleShape menuCircle;
 
 	sf::RenderWindow window;
