@@ -1,5 +1,7 @@
 #include "MainMenu.h"
 #include "IaGUI.h"
+#include "Options.h"
+
 
 void runOnlineGUI()
 {
@@ -10,15 +12,23 @@ void runOnlineCMD()
 {
 	Client2();
 }
+void runOptions() {
 
+	Options();
+}
 
-MainMenu::MainMenu()
+MainMenu::MainMenu(std::string s)
 {
 
 	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
-
-
-
+	
+	playerName = s;
+	
+	if (!font.loadFromFile("Pixeled.ttf"))
+	{
+		std::cout << "Failed to load resources.\n\n";
+		//window.close;
+	}
 	
 	//try {
 
@@ -28,7 +38,7 @@ MainMenu::MainMenu()
 	//	
 	//music.setVolume(50);
 	////music.play();
-	
+
 	menuCircle.setRadius(15);
 	//menuCircle.setPointCount(300);
 	menuCircle.setOutlineThickness(-3);
@@ -36,6 +46,8 @@ MainMenu::MainMenu()
 
 	menuCircle.setPosition(window.getSize().x / 2 - 110 - 100, window.getSize().y / 2 - 100);
 	//menuCircle.setPosition(screenWidth / 2 - getSize().x / 2, screenHeight / 2 - getSize().y / 2);
+	drawMenuItems();
+	
 	while (window.isOpen()) {
 		sf::Event event;
 
@@ -71,7 +83,10 @@ MainMenu::MainMenu()
 						
 					}
 					else if (selectedMenuItem == 3) {
-						Options();
+
+						thread t3(runOptions);
+						t3.detach();
+						
 					}
 
 					break;
@@ -97,7 +112,7 @@ MainMenu::MainMenu()
 
 		window.clear();
 
-		drawMenuItems();
+		update();
 
 		window.display();
 	}
@@ -109,15 +124,16 @@ MainMenu::~MainMenu()
 {
 }
 
+ sf::Font MainMenu::getFont()
+{
+	 
+	return font;
+}
+
 void MainMenu::drawMenuItems()
 {
 	col = rand() % 4 -4;
-	sf::Font font;
-	if (!font.loadFromFile("Pixeled.ttf"))
-	{
-		std::cout << "Failed to load resources.\n\n";
-		//window.close;
-	}
+	
 	sf::Vertex line[] =
 	{
 		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 75)),
@@ -171,6 +187,11 @@ void MainMenu::drawMenuItems()
 	backSprite.setPosition(0,0);
 	//backSprite.setScale(sf::Vector2f(2.f, 2.f));
 	
+	
+}
+
+void MainMenu::update()
+{
 	window.draw(backSprite);
 	window.draw(line, 2, sf::Lines);
 	window.draw(line2, 2, sf::Lines);

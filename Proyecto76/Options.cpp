@@ -39,8 +39,12 @@ Options::Options()
 					break;
 				case sf::Keyboard::Enter:
 					//login
-					if (selectedOptionsItem == 0) openFolder();
-					else if (selectedOptionsItem == 1) {}
+					if (selectedOptionsItem == 0) {
+						openFolder2();
+					}
+					else if (selectedOptionsItem == 1) {
+						select("'KIKE'");
+					}
 					else if (selectedOptionsItem == 2) {
 					
 						try {
@@ -148,7 +152,7 @@ void Options::openFolder()
 	char filename[MAX_PATH];
 	
 
-	OPENFILENAME ofn;
+	//OPENFILENAME ofn;
 	ZeroMemory(&filename, sizeof(filename));
 	ZeroMemory(&ofn, sizeof(ofn));
 	ofn.lStructSize = sizeof(ofn);
@@ -158,15 +162,13 @@ void Options::openFolder()
 	ofn.lpstrFile = filename;
 	ofn.nMaxFile = MAX_PATH;
 	ofn.lpstrTitle = "Select a File, yo!";
-	ofn.Flags = OFN_DONTADDTORECENT | OFN_FILEMUSTEXIST;
+	ofn.Flags = OFN_NOCHANGEDIR | OFN_DONTADDTORECENT | OFN_FILEMUSTEXIST ;
 
 	if (GetOpenFileNameA(&ofn))
 	{
 		songPath = filename;
 		std::cout << "You chose the file \"" << filename << "\"\n";
-		
-		
-
+	
 	}
 	else
 	{
@@ -191,6 +193,37 @@ void Options::openFolder()
 		case FNERR_SUBCLASSFAILURE: std::cout << "FNERR_SUBCLASSFAILURE\n"; break;
 		default: std::cout << "You cancelled.\n";
 		}
+	}
+
+}
+
+void Options::openFolder2()
+{
+
+	// Initialize OPENFILENAME
+	ZeroMemory(&ofn, sizeof(ofn));
+	ofn.lStructSize = sizeof(ofn);
+	//ofn.hwndOwner = hwnd;
+	ofn.lpstrFile = szFile;
+	// Set lpstrFile[0] to '\0' so that GetOpenFileName does not 
+	// use the contents of szFile to initialize itself.
+	ofn.lpstrFile[0] = '\0';
+	ofn.nMaxFile = sizeof(szFile);
+	ofn.lpstrFilter = "Sound\0 * .WAV\0All\0 * .*\0";
+	ofn.nFilterIndex = 1;
+	ofn.lpstrFileTitle = NULL;
+	ofn.nMaxFileTitle = 0;
+	ofn.lpstrInitialDir = NULL;
+	ofn.Flags = OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
+
+	// Display the Open dialog box. 
+
+	if (GetOpenFileName(&ofn) == TRUE) {
+		
+		//std::cout << "path: " << ofn.lpstrFileTitle;
+		songPath = ofn.lpstrFile;
+
+		
 	}
 
 }

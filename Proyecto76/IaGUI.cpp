@@ -1,5 +1,6 @@
 
 #include "IaGUI.h"
+#include "MainMenu.h"
 //int WIDTH = 800;
 //int HEIGHT = 800;
 //char turn = '1';
@@ -24,13 +25,16 @@ void IaGUI::paintBoard() {
 	for (int i = 0; i < 7; i++)
 	{
 		for (int j = 0; j < 7; j++) {
+			circle.setTexture(&circleText);
 			
 			//circle.setPosition(7 + 90 * (i % 7), 7 + 90 * (i / 7));
 			circle.setPosition(800 / 7 * i + 20, 800 / 6 * j + 20 + 200);
-			if (mapaxd[j + 1][i] == '1')
-				circle.setFillColor(sf::Color::Blue);
+			if (mapaxd[j + 1][i] == '1') {
+				circle.setFillColor(cBlue);//blue
+				
+			}
 			else if (mapaxd[j + 1][i] == '2')
-				circle.setFillColor(sf::Color::Yellow);
+				circle.setFillColor(cYellow);//yellow
 			else
 				circle.setFillColor(sf::Color(138, 138, 138));
 			window.draw(circle);
@@ -38,9 +42,9 @@ void IaGUI::paintBoard() {
 
 	}
 	if (turn == '1')
-		turnCircle.setFillColor(sf::Color::Yellow);
+		turnCircle.setFillColor(cYellow);
 	else
-		turnCircle.setFillColor(sf::Color::Blue);
+		turnCircle.setFillColor(cBlue);
 
 	
 	
@@ -55,14 +59,14 @@ void IaGUI::initGUI()
 {
 	//sf::RectangleShape board(sf::Vector2f(800, 800));
 	board.setSize(sf::Vector2f(800, 800));
-	board.setFillColor(sf::Color(250, 150, 255));
+	board.setFillColor(sf::Color(61, 68, 86));
 	board.setOutlineColor(sf::Color::Black);
 	board.setOutlineThickness(5);
 	board.setPosition(0, 200);
 
 	//sf::RectangleShape scoreboard(sf::Vector2f(1000, 200));
 	scoreboard.setSize(sf::Vector2f(800, 200));
-	scoreboard.setFillColor(sf::Color(154, 86, 124));
+	scoreboard.setFillColor(sf::Color(3, 26, 61));
 	scoreboard.setOutlineColor(sf::Color::Black);
 	scoreboard.setOutlineThickness(5);
 	scoreboard.setPosition(0, 0);
@@ -70,7 +74,7 @@ void IaGUI::initGUI()
 
 	//sf::RectangleShape panel(sf::Vector2f(400, 1000));
 	panel.setSize(sf::Vector2f(400, 1000));
-	panel.setFillColor(sf::Color(54, 86, 124));
+	panel.setFillColor(sf::Color(3, 26, 61));
 	panel.setOutlineColor(sf::Color::Black);
 	panel.setOutlineThickness(5);
 	panel.setPosition(800, 000);
@@ -83,7 +87,7 @@ void IaGUI::initGUI()
 	text.setCharacterSize(18); // in pixels, not points!
 	text.setFillColor(sf::Color::White);
 	text.setStyle(sf::Text::Bold);
-	text.setPosition(882, 600);
+	text.setPosition(820, 600);
 
 	//sf::Text turnText;
 	turnText.setFont(font);
@@ -91,7 +95,7 @@ void IaGUI::initGUI()
 	turnText.setCharacterSize(18); // in pixels, not points!
 	turnText.setFillColor(sf::Color::White);
 	turnText.setStyle(sf::Text::Bold);
-	turnText.setPosition(950, 350);
+	turnText.setPosition(900, 350);
 
 	//sf::Text text2;
 	text2.setFont(font);
@@ -99,25 +103,31 @@ void IaGUI::initGUI()
 	text2.setCharacterSize(30); // in pixels, not points!
 	text2.setFillColor(sf::Color::White);
 	text2.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	text2.setPosition(1000, 650);
+	text2.setPosition(925, 650);
 
 	//sf::Text score1;
 	score1.setFont(font);
 	score1.setString(" ");
 	score1.setCharacterSize(50); // in pixels, not points!
-	score1.setFillColor(sf::Color::Blue);
+	score1.setFillColor(cBlue);
+	score1.setOutlineThickness(2);
+
 	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	score1.setPosition(330, 70);
 	score1.setString(std::to_string(twoscore));
+	score1.setOutlineColor(sf::Color::White);
 
 	//sf::Text score2;
 	score2.setFont(font);
 	score2.setString(" ");
 	score2.setCharacterSize(50); // in pixels, not points!
-	score2.setFillColor(sf::Color::Yellow);
+	score2.setFillColor(cYellow);
+	score2.setOutlineThickness(2);
 	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	score2.setPosition(430, 70);
 	score2.setString(std::to_string(onescore));
+	
+	score2.setOutlineColor(sf::Color::Black);
 
 
 	circle.setRadius(38);
@@ -130,12 +140,12 @@ void IaGUI::initGUI()
 	turnCircle.setPointCount(300);
 	turnCircle.setOutlineThickness(-3);
 	turnCircle.setOutlineColor(sf::Color::Black);
-	turnCircle.setPosition(950, 400);
+	turnCircle.setPosition(895, 400);
 
 	//sf::RectangleShape restart(sf::Vector2f(175, 50));
 	restart.setSize(sf::Vector2f(175, 50));
 	restart.setFillColor(sf::Color(255, 150, 0));
-	restart.setPosition(920, 850);
+	restart.setPosition(855, 850);
 	restart.setOutlineColor(sf::Color::Black);
 	restart.setOutlineThickness(1);
 
@@ -144,7 +154,7 @@ void IaGUI::initGUI()
 	restartText.setString("Restart");
 	restartText.setCharacterSize(35);
 	//restartText.setColor(sf::Color::Black);
-	restartText.setPosition(940, 850);
+	restartText.setPosition(875, 850);
 
 
 	//	/*sf::RectangleShape overlay(sf::Vector2f(630, 630));
@@ -189,7 +199,7 @@ void IaGUI::initGUI()
 	}
 	texture.setSmooth(true);
 	sprite.setTexture(texture);
-	sprite.setPosition(950, 90);
+	sprite.setPosition(895, 90);
 	sprite.setScale(sf::Vector2f(4.f, 4.f));
 
 }
@@ -199,7 +209,7 @@ IaGUI::IaGUI(bool mode)
 {
 	
 	
-	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close, settings);
+	window.create(sf::VideoMode(1075, 1000), "Connect 4", sf::Style::Close, settings);
 	
 	//for (int i = 1; i < 8; ++i)
 	//{
@@ -208,7 +218,20 @@ IaGUI::IaGUI(bool mode)
 	//		mapaxd[i][j] = '0';
 	//	}
 	//}
+	cBlue.r = 37;
+	cBlue.g = 91;
+	cBlue.b = 178;
 
+	cYellow.r = 214;
+	cYellow.g = 209;
+	cYellow.b = 7;
+
+
+	if (!circleText.loadFromFile("sirculo.png"))
+	{
+		printf("ASDASDASd");
+	}
+	circleText.setSmooth(true);
 	
 	player1 = "PLAYER 1";
 	player2 = "PLAYER 2";
@@ -228,15 +251,15 @@ IaGUI::IaGUI(bool mode)
 
 	//sf::RectangleShape background(sf::Vector2f(800, 800));
 	//background.setFillColor(sf::Color(238, 38, 38));
-
-	//sf::Font font;
+	//font = m->getFont;
+	
 	if (!font.loadFromFile("SaucerBB.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
 	}
 
-
+	
 	
 	initGUI();
 
@@ -248,6 +271,7 @@ IaGUI::IaGUI(bool mode)
 	win = 0;
 	added = false;
 	go = true;
+	moveCount = 0;
 	
 
 	/*bool tileDropped = false, currentRed = true;
@@ -266,7 +290,7 @@ IaGUI::IaGUI(bool mode)
 				window.close();
 			
 			
-
+			if (moveCount == 42) win = 3;
 			
 			
 
@@ -308,7 +332,9 @@ IaGUI::IaGUI(bool mode)
 					{
 
 						meterFicha2("Player 1: ", player2char, n, 0);
-
+						moveCount++;
+						
+						
 						//pintar2();
 
 
@@ -327,7 +353,8 @@ IaGUI::IaGUI(bool mode)
 					{
 						
 						meterFicha2("Player 1: ", player1char, n, 0);
-
+						moveCount++;
+						
 						//pintar2();
 
 						if (winCheckMapa(1) == 1) {
@@ -353,6 +380,7 @@ IaGUI::IaGUI(bool mode)
 				winner = NONE;*/
 				added = false;
 				IaGUI::changeTurn();
+				moveCount = 0;
 
 			}
 			if (event.type == sf::Event::TextEntered)

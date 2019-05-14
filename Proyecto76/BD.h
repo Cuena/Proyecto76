@@ -9,18 +9,18 @@
 #include <stdio.h>
 
 
+sqlite3* abrirBD();
+int crearBD();
+int createTable();
+int insert();
+int select(std::string s);
+
 //std::string aver;
 class BD
 {
 public:
 	BD();
 	virtual ~BD();
-
-	sqlite3* abrirBD();
-	int crearBD();
-	int createTable();
-	int insert();
-	int select();
 
 	
 };

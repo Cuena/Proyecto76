@@ -1,13 +1,15 @@
 
 #include<SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include <iostream>
 #include <string.h>
 #include <string>
+#include "BD.h"
 
 //#include "MainMenu.h"
 
 #include <windows.h>
-#include <SFML/Audio.hpp>
+
 #pragma once
 
 class Options
@@ -29,6 +31,11 @@ public:
 
 	sf::Music musicOptions;
 
+	OPENFILENAME ofn;       // common dialog box structure
+	char szFile[260];       // buffer for file name
+	HWND hwnd;              // owner window
+	HANDLE hf;              // file handle
+
 	int selectedOptionsItem;
 	int mode;
 
@@ -37,6 +44,7 @@ public:
 
 	void openFolder();
 
+	void openFolder2();
 
 	
 };

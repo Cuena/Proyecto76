@@ -75,7 +75,8 @@ Login::Login()
 					//login
 
 					window.close();
-					MainMenu();
+					//MainMenu * m = new MainMenu(inputUserText.getString());
+					MainMenu(inputUserText.getString());
 
 					break;
 				case sf::Keyboard::Down:

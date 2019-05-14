@@ -1,14 +1,15 @@
 
-//#include "IaGUI.h"
-//#include "Client2.h"
+#include "IaGUI.h"
+#include "Client2.h"
 #include "MainMenu.h"
-//#include "Login.h"
-//#include <iostream>
-//#include <cstdlib>
-//#include "BD.h"
+#include "Login.h"
+#include <iostream>
+#include <cstdlib>
+
+#include "Options.h"
 
 //#include "Options.h"
-
+#include "BD.h"
 
 using namespace std;
 
@@ -28,10 +29,12 @@ int main()
 	
 	//Login();
 
-	//select();
 
-	MainMenu();
 
+	Login();
+
+
+	
 	
 	
 	

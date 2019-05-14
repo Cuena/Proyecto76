@@ -29,6 +29,10 @@ protected:
 
 	sf::Texture texture;
 	sf::Sprite sprite;
+
+	sf::Color cBlue, cYellow;
+
+	 sf::Texture circleText;
 	
 
 	sf::String player1,player2;

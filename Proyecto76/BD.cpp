@@ -14,7 +14,7 @@ sqlite3* abrirBD() {
 		return(0);
 	}
 	else {
-		fprintf(stderr, "Opened database successfully\n");
+		//fprintf(stderr, "Opened database successfully\n");
 	}
 	return db;
 }
@@ -47,7 +47,7 @@ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 	return 0;
 }
 
-int select() {
+int select(std::string s) {
 	sqlite3 *db;
 	char *zErrMsg = 0;
 	int rc;
@@ -57,7 +57,19 @@ int select() {
 	db = abrirBD();
 
 	/* Create SQL statement */
-	sql = "SELECT WINSIA from PLAYER";
+	const char* result = "";
+	const char*temp;
+	std::string str;
+
+	str = "SELECT * FROM PLAYER WHERE NAME = ";             
+	str += s;      
+	str += ";";
+	result = str.c_str();
+	printf(result);
+
+	sql = result;
+	
+	
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
@@ -118,7 +130,7 @@ int insert() {
 	db = abrirBD();
 
 	/* Create SQL statement */
-	sql = "INSERT INTO PLAYER sele"  \
+	sql = "INSERT INTO PLAYER "  \
 		"VALUES ('KIKE', 'ZZZ', 0, 0, 0, 0, 0, 0);";
 
 	/* Execute SQL statement */
@@ -163,4 +175,5 @@ bool isRegistered(std::string s) {
 	return 0;
 
 }
+
 

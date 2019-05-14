@@ -3,22 +3,27 @@ using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+
 #include "onlineGUI.h"
 #include "Client2.h"
+//#include "Options.h"
 #include <thread>
 #include <iostream>
 #include <cstdlib>
 
-#include "Options.h"
+
+
 
 class MainMenu
 {
 public:
-	MainMenu();
+	MainMenu(std::string s);
 	virtual ~MainMenu();
 
 	int selectedMenuItem = 0;
 	int col = 0;
+
+	 std::string playerName;
 	sf::CircleShape menuCircle;
 
 	sf::RenderWindow window;
@@ -36,11 +41,18 @@ public:
 	sf::Sprite backSprite;
 
 	std::string songPath;
-	
 
+	sf::Vertex line[2];
+
+	sf::Vertex line2[2];
+
+	sf::Font font;
+
+	sf::Font getFont();
 
 
 	void drawMenuItems();
+	void update();
 
 	
 };
