@@ -25,6 +25,7 @@
     <ClCompile Include="onlineGUI.cpp" />
     <ClCompile Include="BD.cpp" />
     <ClCompile Include="sqlite3.c" />
+    <ClCompile Include="Options.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="prueba.h">
@@ -48,6 +49,7 @@
     <ClInclude Include="onlineGUI.h" />
     <ClInclude Include="BD.h" />
     <ClInclude Include="sqlite3.h" />
+    <ClInclude Include="Options.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Archivos de encabezado">

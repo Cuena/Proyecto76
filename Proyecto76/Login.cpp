@@ -154,7 +154,7 @@ void Login::drawLoginItems()
 
 void Login::update() {
 
-
+	
 	window.draw(loginTitle);
 	window.draw(userText);
 	window.draw(passwordText);

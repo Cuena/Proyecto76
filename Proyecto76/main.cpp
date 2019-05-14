@@ -1,22 +1,19 @@
 
-#include "IaGUI.h"
-#include "Client2.h"
+//#include "IaGUI.h"
+//#include "Client2.h"
 #include "MainMenu.h"
-#include "Login.h"
-#include <iostream>
-#include <cstdlib>
-#include "BD.h"
+//#include "Login.h"
+//#include <iostream>
+//#include <cstdlib>
+//#include "BD.h"
+
+//#include "Options.h"
 
 
 using namespace std;
 
 
-void f1() {
-	onlineGUI();
-}
-void f2() {
-	Client2();
-}
+
 int main()
 {
 	
@@ -29,7 +26,13 @@ int main()
 	th2.join();*/
 
 	
-	Login();
+	//Login();
+
+	//select();
+
+	MainMenu();
+
+	
 	
 	
 

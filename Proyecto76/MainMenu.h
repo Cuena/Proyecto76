@@ -9,6 +9,8 @@ using namespace std;
 #include <iostream>
 #include <cstdlib>
 
+#include "Options.h"
+
 class MainMenu
 {
 public:
@@ -21,6 +23,8 @@ public:
 
 	sf::RenderWindow window;
 
+	sf::Music music;
+
 	sf::Text menuTitle;
 	sf::Text menuPlayText;
 	sf::Text menuPlayIAText;
@@ -30,6 +34,9 @@ public:
 
 	sf::Texture backTexture;
 	sf::Sprite backSprite;
+
+	std::string songPath;
+	
 
 
 

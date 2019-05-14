@@ -27,6 +27,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="onlineGUI.cpp" />
+    <ClCompile Include="Options.cpp" />
     <ClCompile Include="prueba.cpp" />
     <ClCompile Include="sqlite3.c" />
   </ItemGroup>
@@ -38,6 +39,7 @@
     <ClInclude Include="Login.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="onlineGUI.h" />
+    <ClInclude Include="Options.h" />
     <ClInclude Include="prueba.h" />
     <ClInclude Include="sqlite3.h" />
   </ItemGroup>

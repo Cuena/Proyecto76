@@ -18,15 +18,16 @@ MainMenu::MainMenu()
 	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
 
 
-	sf::Music music;
-	try {
 
-		(!music.openFromFile("plastic love.wav"));
-	}
-	catch (int e) {}
-		
-	music.setVolume(50);
-	music.play();
+	
+	//try {
+
+	//	(!music.openFromFile("plastic love.wav"));
+	//}
+	//catch (int e) {}
+	//	
+	//music.setVolume(50);
+	////music.play();
 	
 	menuCircle.setRadius(15);
 	//menuCircle.setPointCount(300);
@@ -67,6 +68,9 @@ MainMenu::MainMenu()
 
 						t1.join();
 						t2.join();
+					}
+					else if (selectedMenuItem == 3) {
+						Options();
 					}
 
 					break;
