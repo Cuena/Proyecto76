@@ -9,7 +9,7 @@ Options::Options()
 	selectedOptionsItem = 0;
 	mode = 0;
 
-	if (!font.loadFromFile("SaucerBB.ttf"))
+	if (!font.loadFromFile("Pixeled.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
@@ -117,23 +117,23 @@ void Options::initOptions()
 {
 	optionsTitle.setFont(font);
 	optionsTitle.setString("OPTIONS");
-	optionsTitle.setCharacterSize(70);
+	optionsTitle.setCharacterSize(60);
 	optionsTitle.setPosition(window.getSize().x / 2.0f - optionsTitle.getLocalBounds().width / 2.0f - 5, 100);
 
 	musicText.setFont(font);
-	musicText.setString("Select music");
-	musicText.setCharacterSize(40);
-	musicText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f - 100);
+	musicText.setString("SELECT MUSIC");
+	musicText.setCharacterSize(25);
+	musicText.setPosition(window.getSize().x / 2.0f - 30 - 100, window.getSize().y / 2.0f - 100);
 
 	leaderboardText.setFont(font);
-	leaderboardText.setString("Leaderboard");
-	leaderboardText.setCharacterSize(40);
-	leaderboardText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
+	leaderboardText.setString("LEADERBOARD");
+	leaderboardText.setCharacterSize(25);
+	leaderboardText.setPosition(window.getSize().x / 2.0f - 30 - 100, window.getSize().y / 2.0f);
 
 	playText.setFont(font);
-	playText.setString("Play song");
-	playText.setCharacterSize(40);
-	playText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f + 100);
+	playText.setString("PLAY SONG");
+	playText.setCharacterSize(25);
+	playText.setPosition(window.getSize().x / 2.0f - 30 - 100, window.getSize().y / 2.0f + 100);
 
 
 

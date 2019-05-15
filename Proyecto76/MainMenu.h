@@ -22,7 +22,7 @@ public:
 
 	int selectedMenuItem = 0;
 	int col = 0;
-
+	bool full = true;
 	 std::string playerName;
 	sf::CircleShape menuCircle;
 
