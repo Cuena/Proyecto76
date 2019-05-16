@@ -37,7 +37,7 @@ int crearBD() {
 	return 0;
 }
 
-static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
+ static int callback(void *NotUsed, int argc, char **argv, char **azColName) {
 	int i;
 	for (i = 0; i < argc; i++) {
 		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
@@ -61,9 +61,9 @@ int select(std::string s) {
 	const char*temp;
 	std::string str;
 
-	str = "SELECT * FROM PLAYER WHERE NAME = ";             
+	str = "SELECT * FROM PLAYER WHERE NAME = '";             
 	str += s;      
-	str += ";";
+	str += "';";
 	result = str.c_str();
 	printf(result);
 
@@ -88,6 +88,41 @@ int select(std::string s) {
 	return 0;
 }
 
+int update(std::string s) {
+	sqlite3 *db;
+	char *zErrMsg = 0;
+	int rc;
+	const char *sql;
+	const char* data = "Callback function called";
+
+	db = abrirBD();
+
+	/* Create SQL statement */
+	const char* result = "";
+	const char*temp;
+	std::string str;
+
+	
+	str = s;
+	
+	result = str.c_str();
+	printf(result);
+
+	sql = result;
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	else {
+		fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+	return 0;
+}
 int createTable() {
 	sqlite3 *db;
 	char *zErrMsg = 0;
@@ -121,6 +156,7 @@ int createTable() {
 	return 0;
 }
 
+
 int insert() {
 	sqlite3 *db;
 	char *zErrMsg = 0;
@@ -147,33 +183,43 @@ int insert() {
 	return 0;
 }
 
-
-
-bool isRegistered(std::string s) {
+int insert(std::string s) {
 	sqlite3 *db;
 	char *zErrMsg = 0;
 	int rc;
 	const char *sql;
-	const char* data = "Callback function called";
 
 	db = abrirBD();
 
 	/* Create SQL statement */
-	sql = "SELECT * from PLAYER";
+	std::string str;
+	
+	
+	const char* result = "";
+	printf("bd: %s\n", s);
+	str = "INSERT INTO PLAYER VALUES ('";
+	str += s;
+	str += "',";
+	str += "'pass',0, 0, 0, 0, 0, 0); ";
+	result = str.c_str();
+	printf(result);
+
+	sql = result;
 
 	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*)data, &zErrMsg);
+	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
 	if (rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
 	}
 	else {
-		fprintf(stdout, "Operation done successfully\n");
+		fprintf(stdout, "Records created successfully\n");
 	}
 	sqlite3_close(db);
 	return 0;
-
 }
+
+
 
 

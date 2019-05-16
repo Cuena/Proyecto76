@@ -8,8 +8,9 @@ Options::Options()
 	window.create(sf::VideoMode(700, 800), "Options", sf::Style::Close);
 	selectedOptionsItem = 0;
 	mode = 0;
+	
 
-	if (!font.loadFromFile("Pixeled.ttf"))
+	if (!font.loadFromFile("SaucerBB.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
@@ -42,10 +43,8 @@ Options::Options()
 					if (selectedOptionsItem == 0) {
 						openFolder2();
 					}
+					
 					else if (selectedOptionsItem == 1) {
-						select("'KIKE'");
-					}
-					else if (selectedOptionsItem == 2) {
 					
 						try {
 							std::cout << "path: " << songPath;
@@ -61,7 +60,7 @@ Options::Options()
 
 					break;
 				case sf::Keyboard::Down:
-					if (selectedOptionsItem < 2) {
+					if (selectedOptionsItem < 1) {
 
 						selectedOptionsItem++;
 
@@ -83,21 +82,21 @@ Options::Options()
 
 			musicText.setOutlineColor(sf::Color(24, 140, 124));
 			musicText.setOutlineThickness(5);
-			leaderboardText.setOutlineThickness(0);
+			//leaderboardText.setOutlineThickness(0);
 			playText.setOutlineThickness(0);
 		}
-		else if (selectedOptionsItem == 1) {
-			leaderboardText.setOutlineColor(sf::Color(24, 140, 124));
-			leaderboardText.setOutlineThickness(5);
+		else if (selectedOptionsItem == 45345) {
+			//leaderboardText.setOutlineColor(sf::Color(24, 140, 124));
+			//leaderboardText.setOutlineThickness(5);
 			musicText.setOutlineThickness(0);
 			playText.setOutlineThickness(0);
 		}
 
-		else if (selectedOptionsItem == 2) {
+		else if (selectedOptionsItem == 1) {
 			playText.setOutlineColor(sf::Color(24, 140, 124));
 			playText.setOutlineThickness(5);
 			musicText.setOutlineThickness(0);
-			leaderboardText.setOutlineThickness(0);
+			//leaderboardText.setOutlineThickness(0);
 		}
 
 		window.clear();
@@ -107,33 +106,40 @@ Options::Options()
 
 	
 }
+//
+//Options::Options()
+//{
+//	printf("me cago en dios");
+//}
 
 
 Options::~Options()
 {
 }
 
+
+
 void Options::initOptions()
 {
 	optionsTitle.setFont(font);
 	optionsTitle.setString("OPTIONS");
-	optionsTitle.setCharacterSize(60);
+	optionsTitle.setCharacterSize(70);
 	optionsTitle.setPosition(window.getSize().x / 2.0f - optionsTitle.getLocalBounds().width / 2.0f - 5, 100);
 
 	musicText.setFont(font);
-	musicText.setString("SELECT MUSIC");
-	musicText.setCharacterSize(25);
-	musicText.setPosition(window.getSize().x / 2.0f - 30 - 100, window.getSize().y / 2.0f - 100);
+	musicText.setString("Select music");
+	musicText.setCharacterSize(40);
+	musicText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f - 100);
 
-	leaderboardText.setFont(font);
-	leaderboardText.setString("LEADERBOARD");
-	leaderboardText.setCharacterSize(25);
-	leaderboardText.setPosition(window.getSize().x / 2.0f - 30 - 100, window.getSize().y / 2.0f);
-
+	/*leaderboardText.setFont(font);
+	leaderboardText.setString("Leaderboard");
+	leaderboardText.setCharacterSize(40);
+	leaderboardText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
+*/
 	playText.setFont(font);
-	playText.setString("PLAY SONG");
-	playText.setCharacterSize(25);
-	playText.setPosition(window.getSize().x / 2.0f - 30 - 100, window.getSize().y / 2.0f + 100);
+	playText.setString("Play song");
+	playText.setCharacterSize(40);
+	playText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
 
 
 
@@ -143,7 +149,7 @@ void Options::update()
 {
 	window.draw(optionsTitle);
 	window.draw(musicText);
-	window.draw(leaderboardText);
+	//window.draw(leaderboardText);
 	window.draw(playText);
 }
 

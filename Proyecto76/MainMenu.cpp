@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 #include "IaGUI.h"
 #include "Options.h"
-#include "BD.h"
+
 
 void runOnlineGUI()
 {
@@ -22,8 +22,9 @@ MainMenu::MainMenu(std::string s)
 
 	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
 	
+	
 	playerName = s;
-	cout << s << endl;
+	printf("MENU: %s\n", playerName);
 	
 	if (!font.loadFromFile("Pixeled.ttf"))
 	{
@@ -70,10 +71,10 @@ MainMenu::MainMenu(std::string s)
 
 				case sf::Keyboard::Enter:
 					if (selectedMenuItem == 0) {
-						IaGUI(false);
+						IaGUI(false,playerName);
 					}
 					else if (selectedMenuItem == 1) {
-						IaGUI(true);
+						IaGUI(true,playerName);
 					}
 					else if (selectedMenuItem == 2) {
 						
@@ -85,9 +86,15 @@ MainMenu::MainMenu(std::string s)
 					}
 					else if (selectedMenuItem == 3) {
 
+						
+
+						select(playerName);
+						
+					}
+					else if (selectedMenuItem == 4) {
+
 						thread t3(runOptions);
 						t3.detach();
-						
 					}
 					else if (selectedMenuItem == 4) {
 
@@ -98,7 +105,7 @@ MainMenu::MainMenu(std::string s)
 					break;
 
 				case sf::Keyboard::Down:
-					if (selectedMenuItem < 4) {
+					if (selectedMenuItem < 5) {
 						selectedMenuItem++;
 						menuCircle.setPosition(menuCircle.getPosition().x, menuCircle.getPosition().y + 100);
 					}
@@ -173,15 +180,20 @@ void MainMenu::drawMenuItems()
 	menuPlayOnlineText.setCharacterSize(30);
 	menuPlayOnlineText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 100);
 
+	statsText.setFont(font);
+	statsText.setString("STATS");
+	statsText.setCharacterSize(30);
+	statsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 200);
+
 	menuOptionsText.setFont(font);
 	menuOptionsText.setString("OPTIONS");
 	menuOptionsText.setCharacterSize(30);
-	menuOptionsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 200);
+	menuOptionsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 300);
 
 	menuQuitText.setFont(font);
 	menuQuitText.setString("QUIT");
 	menuQuitText.setCharacterSize(30);
-	menuQuitText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 300);
+	menuQuitText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 400);
 
 
 	if (!backTexture.loadFromFile("Black.jpg"))
@@ -206,6 +218,7 @@ void MainMenu::update()
 	window.draw(menuOptionsText);
 	window.draw(menuPlayIAText);
 	window.draw(menuPlayOnlineText);
+	window.draw(statsText);
 	window.draw(menuQuitText);
 	window.draw(menuCircle);
 }

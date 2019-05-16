@@ -32,10 +32,12 @@ protected:
 
 	sf::Color cBlue, cYellow;
 
-	 sf::Texture circleText;
+	sf::Texture circleText;
+
+	sf::Texture backgroundTexture;
 	
 
-	sf::String player1,player2;
+	sf::String player1,player2, playerName;
 
 	int n;
 	std::string s = " ";
@@ -43,7 +45,7 @@ protected:
 
 public: 
 
-	IaGUI(bool mode);
+	IaGUI(bool mode,std::string s);
 	void changeTurn();
 	void paintBoard();
 	void updateGUI();

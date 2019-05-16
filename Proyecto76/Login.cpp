@@ -1,11 +1,9 @@
 #include "Login.h"
 #include "MainMenu.h"
 #include "BD.h"
-
-
-
-
-
+#include <iostream>
+#include <fstream>
+#include <vector>
 
 
 
@@ -14,7 +12,7 @@ Login::Login()
 	window.create(sf::VideoMode(700, 800), "Connect 4", sf::Style::Close);
 
 
-	if (!font.loadFromFile("Pixeled.ttf"))
+	if (!font.loadFromFile("SaucerBB.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
@@ -44,7 +42,7 @@ Login::Login()
 						catch (int e) {}
 
 					}
-					else if (selectedLoginItem == 1 && passwordString.getSize() > 0) {
+					/*else if (selectedLoginItem == 1 && passwordString.getSize() > 0) {
 
 						try {
 							passwordString.erase(passwordString.getSize() - 1, 1);
@@ -52,7 +50,7 @@ Login::Login()
 						}
 						catch (int e) {}
 
-					}
+					}*/
 
 				}
 				else if (event.text.unicode < 128)
@@ -61,34 +59,42 @@ Login::Login()
 						userString += event.text.unicode;
 						inputUserText.setString(userString);
 					}
-					else if (selectedLoginItem == 1 && passwordString.getSize()<10) {
+					/*else if (selectedLoginItem == 1 && passwordString.getSize()<10) {
 						passwordString += event.text.unicode;
 						inputPasswordText.setString(passwordString);
-					}
+					}*/
 				}
 				break;
 
 			case sf::Event::KeyPressed:
 				switch (event.key.code) {
-				case sf::Keyboard::Up:
+				/*case sf::Keyboard::Up:
 					if (selectedLoginItem > 0) {
 						passwordText.setOutlineColor(sf::Color::Blue);
 						selectedLoginItem--;
 					}
-					break;
+					break;*/
 				case sf::Keyboard::Enter:
 					//login
 
 					
+					if (isPlayer(inputUserText.getString())) {
+						MainMenu(inputUserText.getString());
+					}
+					else {
+						printf("joder-> %s\n", inputUserText.getString());
+						insert(inputUserText.getString());
+						writePlayer(inputUserText.getString());
+						MainMenu(inputUserText.getString());
+					}
+
+
+					window.close();
 					//MainMenu * m = new MainMenu(inputUserText.getString());
 					
-						window.close();
-						MainMenu(inputUserText.getString());
-						break;
-					
-					//break;
-				
-				case sf::Keyboard::Down:
+
+					break;
+				/*case sf::Keyboard::Down:
 					if (selectedLoginItem < 1) {
 
 						selectedLoginItem++;
@@ -96,7 +102,7 @@ Login::Login()
 					}
 					break;
 				default:
-					break;
+					break;*/
 				}
 			default:
 				break;
@@ -110,14 +116,14 @@ Login::Login()
 
 			userText.setOutlineColor(sf::Color(24, 140, 124));
 			userText.setOutlineThickness(5);
-			passwordText.setOutlineThickness(0);
+			//passwordText.setOutlineThickness(0);
 		}
-		else if (selectedLoginItem == 1) {
+		/*else if (selectedLoginItem == 1) {
 			passwordText.setOutlineColor(sf::Color(24, 140, 124));
 			passwordText.setOutlineThickness(5);
 			userText.setOutlineThickness(0);
 		}
-
+*/
 		window.clear();
 
 		update();
@@ -135,27 +141,27 @@ void Login::drawLoginItems()
 {
 	loginTitle.setFont(font);
 	loginTitle.setString("LOGIN");
-	loginTitle.setCharacterSize(60);
+	loginTitle.setCharacterSize(70);
 	loginTitle.setPosition(window.getSize().x / 2.0f - loginTitle.getLocalBounds().width / 2.0f - 5, 100);
 
 	userText.setFont(font);
-	userText.setString("USERNAME: ");
-	userText.setCharacterSize(25);
+	userText.setString("Username: ");
+	userText.setCharacterSize(40);
 	userText.setPosition(window.getSize().x / 2.0f - 10 - 200, window.getSize().y / 2.0f - 100);
 
-	passwordText.setFont(font);
-	passwordText.setString("PASSWORD: ");
-	passwordText.setCharacterSize(25);
+	/*passwordText.setFont(font);
+	passwordText.setString("Password: ");
+	passwordText.setCharacterSize(40);
 	passwordText.setPosition(window.getSize().x / 2.0f - 10 - 200, window.getSize().y / 2.0f);
-
+*/
 	inputUserText.setFont(font);
 	inputUserText.setString(" ");
-	inputUserText.setCharacterSize(25);
+	inputUserText.setCharacterSize(40);
 	inputUserText.setPosition(window.getSize().x / 2.0f - 10 + 50, window.getSize().y / 2.0f - 100);
 
 	inputPasswordText.setFont(font);
 	inputPasswordText.setString(" ");
-	inputPasswordText.setCharacterSize(25);
+	inputPasswordText.setCharacterSize(40);
 	inputPasswordText.setPosition(window.getSize().x / 2.0f - 10 + 50, window.getSize().y / 2.0f);
 
 
@@ -167,11 +173,72 @@ void Login::update() {
 	
 	window.draw(loginTitle);
 	window.draw(userText);
-	window.draw(passwordText);
+	//window.draw(passwordText);
 	window.draw(inputUserText);
-	window.draw(inputPasswordText);
+	//window.draw(inputPasswordText);
 
 }
 
+
+int Login::readSize() {
+
+
+	std::fstream myfile("size.txt", std::ios_base::in);
+
+	int a;
+	(myfile >> a);
+
+
+	return a;
+
+	myfile.close();
+	//getchar();
+
+	return 0;
+}
+
+
+
+void Login::incSize() {
+
+	int size = readSize();
+
+	ofstream newFile("size.txt");
+
+	if (newFile.is_open())
+	{
+		newFile << size+1;
+	}
+	else
+	{
+		//You're in trouble now Mr!
+	}
+
+
+	newFile.close();
+}
+
+bool Login::isPlayer(std::string s)
+{
+
+	ifstream file;
+	string line;
+	file.open("players.txt");
+	while (getline(file, line)) {
+		if (line == s) { 
+
+			printf("found\n");
+			return true; 
+		}
+	}
+	return false;
+}
+
+void Login::writePlayer(std::string p)
+{
+	ofstream newFile("players.txt", std::ios_base::app);
+
+	newFile << p << "\n";
+}
 
 
