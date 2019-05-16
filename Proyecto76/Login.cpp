@@ -4,6 +4,11 @@
 
 
 
+
+
+
+
+
 Login::Login()
 {
 	window.create(sf::VideoMode(700, 800), "Connect 4", sf::Style::Close);
@@ -74,11 +79,15 @@ Login::Login()
 				case sf::Keyboard::Enter:
 					//login
 
-					window.close();
+					
 					//MainMenu * m = new MainMenu(inputUserText.getString());
-					MainMenu(inputUserText.getString());
-
-					break;
+					
+						window.close();
+						MainMenu(inputUserText.getString());
+						break;
+					
+					//break;
+				
 				case sf::Keyboard::Down:
 					if (selectedLoginItem < 1) {
 
@@ -163,4 +172,6 @@ void Login::update() {
 	window.draw(inputPasswordText);
 
 }
+
+
 

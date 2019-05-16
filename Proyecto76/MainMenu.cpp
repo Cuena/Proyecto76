@@ -1,7 +1,7 @@
 #include "MainMenu.h"
 #include "IaGUI.h"
 #include "Options.h"
-
+#include "BD.h"
 
 void runOnlineGUI()
 {
@@ -23,6 +23,7 @@ MainMenu::MainMenu(std::string s)
 	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
 	
 	playerName = s;
+	cout << s << endl;
 	
 	if (!font.loadFromFile("Pixeled.ttf"))
 	{

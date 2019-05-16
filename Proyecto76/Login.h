@@ -1,7 +1,10 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning( disable : 4789 )
 using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include<fstream>
 
 class Login
 {
@@ -24,6 +27,7 @@ public:
 	sf::Font font;
 	void drawLoginItems();
 	void update();
+	
 
 };
 
