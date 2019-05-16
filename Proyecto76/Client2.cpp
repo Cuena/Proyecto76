@@ -278,6 +278,7 @@ void Client2::connectServer()
 
 	if (connResult == SOCKET_ERROR) {
 		printf("mierda");
+		*fin = false;
 		closesocket(sock);
 		WSACleanup();
 		return;

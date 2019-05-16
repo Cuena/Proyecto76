@@ -310,8 +310,15 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 				
 					int prueba = AIManager();
-					//printf("La prueba ha decidido que se meta en: %i", prueba);
-					meterFicha2("", player2char, prueba, 0);
+					printf("La prueba ha decidido que se meta en: %i \n", prueba);
+					if (prueba != 0) {
+						meterFicha2("", player2char, prueba, 0);
+					}
+					else {
+						do { prueba = rand() % 7 + 1; } while (llena(prueba)!=0);
+						meterFicha2("", player2char, prueba, 0);
+					
+					}
 					//pintar2();
 				
 			

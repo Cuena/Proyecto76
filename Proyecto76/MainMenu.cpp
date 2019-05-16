@@ -96,6 +96,11 @@ MainMenu::MainMenu(std::string s)
 						thread t3(runOptions);
 						t3.detach();
 					}
+					else if (selectedMenuItem == 4) {
+
+						exit(0);
+
+					}
 
 					break;
 
