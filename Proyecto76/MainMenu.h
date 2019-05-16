@@ -23,7 +23,8 @@ public:
 	int selectedMenuItem = 0;
 	int col = 0;
 
-	 std::string playerName;
+	std::string playerName;
+
 	sf::CircleShape menuCircle;
 
 	sf::RenderWindow window;
@@ -36,6 +37,7 @@ public:
 	sf::Text menuPlayOnlineText;
 	sf::Text menuOptionsText;
 	sf::Text menuQuitText;
+	sf::Text statsText;
 
 	sf::Texture backTexture;
 	sf::Sprite backSprite;
@@ -50,7 +52,8 @@ public:
 
 	sf::Font getFont();
 
-
+	
+	
 	void drawMenuItems();
 	void update();
 

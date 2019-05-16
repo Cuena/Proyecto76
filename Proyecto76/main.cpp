@@ -10,6 +10,7 @@
 
 //#include "Options.h"
 #include "BD.h"
+#include <fstream>
 
 using namespace std;
 
@@ -27,10 +28,6 @@ int main()
 	th2.join();*/
 
 	
-	//Login();
-
-
-
 	Login();
 
 

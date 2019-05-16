@@ -1,6 +1,7 @@
 
 #include "IaGUI.h"
 #include "MainMenu.h"
+#include "BD.h"
 //int WIDTH = 800;
 //int HEIGHT = 800;
 //char turn = '1';
@@ -74,10 +75,11 @@ void IaGUI::initGUI()
 
 	//sf::RectangleShape panel(sf::Vector2f(400, 1000));
 	panel.setSize(sf::Vector2f(400, 1000));
-	panel.setFillColor(sf::Color(3, 26, 61));
+	//panel.setFillColor(sf::Color(3, 26, 61));
 	panel.setOutlineColor(sf::Color::Black);
 	panel.setOutlineThickness(5);
 	panel.setPosition(800, 000);
+	panel.setTexture(&backgroundTexture);
 
 
 
@@ -205,12 +207,13 @@ void IaGUI::initGUI()
 }
 
 
-IaGUI::IaGUI(bool mode)
+IaGUI::IaGUI(bool mode,std::string s)
 {
 	
 	
 	window.create(sf::VideoMode(1075, 1000), "Connect 4", sf::Style::Close, settings);
 	
+	playerName = s;
 	//for (int i = 1; i < 8; ++i)
 	//{
 	//	for (int j = 0; j < 7; j++)
@@ -229,11 +232,19 @@ IaGUI::IaGUI(bool mode)
 
 	if (!circleText.loadFromFile("sirculo.png"))
 	{
-		printf("ASDASDASd");
+		printf("image error");
 	}
 	circleText.setSmooth(true);
+
+
+	if (!backgroundTexture.loadFromFile("gradient2.jpg"))
+	{
+		printf("image error");
+	}
 	
-	player1 = "PLAYER 1";
+
+	
+	player1 = playerName;
 	player2 = "PLAYER 2";
 	int moveCount = 0;
 
@@ -243,6 +254,7 @@ IaGUI::IaGUI(bool mode)
 	onescore = 0;
 	twoscore = 0;
 
+	
 	
 	settings.antialiasingLevel = 8;
 	
@@ -405,6 +417,31 @@ IaGUI::IaGUI(bool mode)
 					ggText.setString("Blue Wins!");
 					ggText.setPosition(100,400 );
 					onescore++;
+					if (mode) {
+
+						const char* result = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET WINSIA = WINSIA + 1 WHERE NAME = '";
+						str += playerName;
+						str += "';";
+						result = str.c_str();
+
+						update(result);
+					}
+					else {
+	
+						const char* result = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET WINSPVP = WINSPVP + 1 WHERE NAME = '";
+						
+						str += playerName;
+						str += "';";
+						result = str.c_str();
+
+						update(result);
+					}
 					score1.setString(std::to_string(onescore));
 					//std::cout << onescore << "\n";
 					added = true;
@@ -419,6 +456,30 @@ IaGUI::IaGUI(bool mode)
 					ggText.setString("Yellow Wins!");
 					ggText.setPosition(100, 400);
 					twoscore++;
+					if (mode) {
+
+						const char* result = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESIA = LOSESIA + 1 WHERE NAME = '";
+						str += playerName;
+						str += "';";
+						result = str.c_str();
+
+						update(result);
+					}
+					else {
+
+						const char* result = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESPVP = LOSESPVP + 1 WHERE NAME = '";
+						str += playerName;
+						str += "';";
+						result = str.c_str();
+
+						update(result);
+					}
 					score2.setString(std::to_string(twoscore));
 					added = true;
 					IaGUI::changeTurn();

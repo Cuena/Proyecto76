@@ -15,14 +15,17 @@
 class Options
 {
 public:
+	
 	Options();
+	//Options();
 	virtual ~Options();
 
+	
 	sf::RenderWindow window;
 
 	sf::Text optionsTitle;
 	sf::Text musicText;
-	sf::Text leaderboardText;
+	//sf::Text leaderboardText;
 	sf::Text playText;
 	sf::Text t2;
 
@@ -36,6 +39,8 @@ public:
 	HWND hwnd;              // owner window
 	HANDLE hf;              // file handle
 
+	std::string playerName;
+
 	int selectedOptionsItem;
 	int mode;
 
@@ -45,6 +50,8 @@ public:
 	void openFolder();
 
 	void openFolder2();
+
+	
 
 	
 };
