@@ -111,39 +111,60 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin) {
 
 				if (*jugador == '1'&&*toca) {
 					meterFicha2("", player1char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
+					if (winCheckMapa(1) == 1) {
+
+						printf("HA GANADO 1");
+
+						*fin = false;
+					}
 					*toca = false;
-
-
 				}
 				else if (*jugador == '2' && !*toca) {
 					meterFicha2("", player1char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
 					*toca = true;
+					if (winCheckMapa(1) == 1) {
+
+						printf("HA GANADO 1");
+
+						*fin = false;
+					}
 				}
 				else if (*jugador == '2' && *toca) {
 					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
+					if (winCheckMapa(2) == 2) {
+
+						printf("HA GANADO 2");
+
+						*fin = false;
+					}
 					*toca = false;
 				}
 				else if (*jugador == '1' && !*toca) {
 					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
+					if (winCheckMapa(2) == 2) {
+
+						printf("HA GANADO 2");
+
+						*fin = false;
+					}
 					*toca = true;
 				}
-				//pintar2();
+				pintar2();
+				printf("%c \n", *jugador);
 
+				//if (winCheckMapa(*jugador-'0') == 1) {
 
-				if (winCheckMapa(1) == 1) {
+				//	printf("HA GANADO 1");
+				//	
+				//	*fin = false;
+				//}
+				//if (winCheckMapa(*jugador - '0') == 2) {
 
-					printf("HA GANADO EL JUGADOR 1");
-					system("pause");
-					*fin = false;
-				}
+				//	printf("HA GANADO EL JUGADOR 2");
+				//	
+				//	*fin=false;
 
-				if (winCheckMapa(2) == 2) {
-
-					printf("HA GANADO EL JUGADOR 2");
-					system("pause");
-					*fin=false;
-
-				}
+				//}
 
 			}
 
@@ -204,9 +225,9 @@ Client2::Client2()
 			//MainMenu();
 			break;
 		}
-		if(*toca)
-		int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
-		
+		if (*toca&&userInput!=""&&(userInput.at(0)-'0')<8&& (userInput.at(0) - '0')>0) {
+			int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
+		}
 		
 		
 		
@@ -225,7 +246,7 @@ Client2::Client2()
 
 		//}
 
-	} while (userInput.size() > 0);
+	} while (true);
 
 	//gracefully cole down everything
 	

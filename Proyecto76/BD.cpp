@@ -196,7 +196,7 @@ int insert(std::string s) {
 	
 	
 	const char* result = "";
-	printf("bd: %s\n", s);
+	//printf("bd: %s\n", s);
 	str = "INSERT INTO PLAYER VALUES ('";
 	str += s;
 	str += "',";

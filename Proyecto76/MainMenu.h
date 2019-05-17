@@ -16,6 +16,7 @@ using namespace std;
 
 class MainMenu
 {
+
 public:
 	MainMenu(std::string s);
 	virtual ~MainMenu();
@@ -44,9 +45,9 @@ public:
 
 	std::string songPath;
 
-	sf::Vertex line[2];
+	//sf::Vertex line[2];
 
-	sf::Vertex line2[2];
+	//sf::Vertex line2[2];
 
 	sf::Font font;
 

@@ -24,7 +24,7 @@ MainMenu::MainMenu(std::string s)
 	
 	
 	playerName = s;
-	printf("MENU: %s\n", playerName);
+	//printf("MENU: %s\n", playerName);
 	
 	if (!font.loadFromFile("Pixeled.ttf"))
 	{
@@ -147,17 +147,7 @@ void MainMenu::drawMenuItems()
 {
 	col = rand() % 4 -4;
 	
-	sf::Vertex line[] =
-	{
-		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 75)),
-		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5)+560, 75))
-	};
 
-	sf::Vertex line2[] =
-	{
-		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 180)),
-		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5) + 560, 180))
-	};
 
 
 	menuTitle.setFont(font);
@@ -210,6 +200,18 @@ void MainMenu::drawMenuItems()
 
 void MainMenu::update()
 {
+	sf::Vertex line[] =
+	{
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 75)),
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5) + 560, 75))
+	};
+
+	sf::Vertex line2[] =
+	{
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 180)),
+		sf::Vertex(sf::Vector2f((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5) + 560, 180))
+	};
+
 	window.draw(backSprite);
 	window.draw(line, 2, sf::Lines);
 	window.draw(line2, 2, sf::Lines);
