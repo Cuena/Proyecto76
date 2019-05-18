@@ -135,7 +135,7 @@ void Options::initOptions()
 	leaderboardText.setString("Leaderboard");
 	leaderboardText.setCharacterSize(40);
 	leaderboardText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
-*/
+	*/
 	playText.setFont(font);
 	playText.setString("Play song");
 	playText.setCharacterSize(40);

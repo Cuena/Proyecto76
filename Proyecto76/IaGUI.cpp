@@ -31,11 +31,11 @@ void IaGUI::paintBoard() {
 			//circle.setPosition(7 + 90 * (i % 7), 7 + 90 * (i / 7));
 			circle.setPosition(800 / 7 * i + 20, 800 / 6 * j + 20 + 200);
 			if (mapaxd[j + 1][i] == '1') {
-				circle.setFillColor(cBlue);//blue
+				circle.setFillColor(sf::Color::Blue);//blue
 				
 			}
 			else if (mapaxd[j + 1][i] == '2')
-				circle.setFillColor(cYellow);//yellow
+				circle.setFillColor(sf::Color::Yellow);//yellow
 			else
 				circle.setFillColor(sf::Color(138, 138, 138));
 			window.draw(circle);
@@ -115,7 +115,7 @@ void IaGUI::initGUI()
 	score1.setOutlineThickness(2);
 
 	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score1.setPosition(330, 70);
+	score1.setPosition(330, 60);
 	score1.setString(std::to_string(twoscore));
 	score1.setOutlineColor(sf::Color::White);
 
@@ -126,7 +126,7 @@ void IaGUI::initGUI()
 	score2.setFillColor(cYellow);
 	score2.setOutlineThickness(2);
 	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score2.setPosition(430, 70);
+	score2.setPosition(430, 60);
 	score2.setString(std::to_string(onescore));
 	
 	score2.setOutlineColor(sf::Color::Black);
@@ -179,14 +179,14 @@ void IaGUI::initGUI()
 	p1Text.setCharacterSize(32); // in pixels, not points!
 	p1Text.setFillColor(sf::Color::White);
 	p1Text.setStyle(sf::Text::Bold);
-	p1Text.setPosition(70, 85);
+	p1Text.setPosition(175, 80);
 
 	p2Text.setFont(font);
 	p2Text.setString(player2);
 	p2Text.setCharacterSize(32); // in pixels, not points!
 	p2Text.setFillColor(sf::Color::White);
 	p2Text.setStyle(sf::Text::Bold);
-	p2Text.setPosition(550, 85);
+	p2Text.setPosition(550, 80);
 
 	columnsText.setFont(font);
 	columnsText.setString("1          2           3           4          5           6          7");
@@ -229,6 +229,13 @@ IaGUI::IaGUI(bool mode,std::string s)
 	cYellow.g = 209;
 	cYellow.b = 7;
 
+	if (mode) {
+		player2 = "MOB0";
+	}
+	else {
+		player2 = "player 2";
+	}
+
 
 	if (!circleText.loadFromFile("sirculo.png"))
 	{
@@ -245,7 +252,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 	
 	player1 = playerName;
-	player2 = "PLAYER 2";
+	//player2 = "PLAYER 2";
 	int moveCount = 0;
 
 	char str[3];

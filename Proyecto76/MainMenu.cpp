@@ -186,7 +186,7 @@ void MainMenu::drawMenuItems()
 	statsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 200);
 
 	menuOptionsText.setFont(font);
-	menuOptionsText.setString("OPTIONS");
+	menuOptionsText.setString("MUSIC");
 	menuOptionsText.setCharacterSize(30);
 	menuOptionsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 300);
 
