@@ -5,7 +5,7 @@
 
 onlineGUI::onlineGUI()
 {
-	window.create(sf::VideoMode(800, 800), "Connect 4", sf::Style::Close);
+	window.create(sf::VideoMode(800, 800), "Online", sf::Style::Close);
 	circle.setRadius(38);
 	circle.setPointCount(300);
 	circle.setOutlineThickness(-3);

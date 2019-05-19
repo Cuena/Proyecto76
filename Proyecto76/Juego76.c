@@ -328,7 +328,7 @@ int NegaMax(int Depth)  //Algoritmo NegaMax programado para el 4 en raya
 			mapa[ult2[0]][ult2[1]] = '0';
 		}
 	}
-	if (Depth <= 6)
+	if (Depth <= 2)
 	{
 
 		for (int column = 1; column <= 7; column++)

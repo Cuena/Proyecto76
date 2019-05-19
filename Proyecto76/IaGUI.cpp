@@ -2,9 +2,11 @@
 #include "IaGUI.h"
 #include "MainMenu.h"
 #include "BD.h"
+#include <cctype>
 
 
-	
+//Con esta clase se gestionan los modos vs jugador y vs IA	
+
 
 
 void IaGUI::changeTurn() {
@@ -15,6 +17,7 @@ void IaGUI::changeTurn() {
 
 }
 
+//pinta los circulos en el tablero
 void IaGUI::paintBoard() {
 	mapaxd[7][7]= pintar3(mapaxd);
 
@@ -26,13 +29,13 @@ void IaGUI::paintBoard() {
 			//circle.setPosition(7 + 90 * (i % 7), 7 + 90 * (i / 7));
 			circle.setPosition(800 / 7 * i + 20, 800 / 6 * j + 20 + 200);
 			if (mapaxd[j + 1][i] == '1') {
-				circle.setFillColor(sf::Color::Blue);//blue
+				circle.setFillColor(cBlue);//blue
 				
 			}
 			else if (mapaxd[j + 1][i] == '2')
-				circle.setFillColor(sf::Color::Yellow);//yellow
+				circle.setFillColor(cYellow);//yellow
 			else
-				circle.setFillColor(sf::Color(138, 138, 138));
+				circle.setFillColor(sf::Color(104, 122, 130));
 			window.draw(circle);
 		}
 
@@ -46,11 +49,7 @@ void IaGUI::paintBoard() {
 	
 }
 
-void IaGUI::updateGUI()
-{
-
-}
-
+//inicializacion de componentes
 void IaGUI::initGUI()
 {
 	
@@ -198,6 +197,11 @@ void IaGUI::initGUI()
 	columnsText.setStyle(sf::Text::Bold);
 	columnsText.setPosition(50, 155);
 
+	colRect.setSize(sf::Vector2f(95,777));
+	//colRect.setOutlineColor(sf::Color::Red);
+	colRect.setOutlineThickness(2);
+	colRect.setFillColor(sf::Color::Transparent);
+
 	if (!texture.loadFromFile("Mob0.png"))
 	{
 
@@ -230,15 +234,15 @@ IaGUI::IaGUI(bool mode,std::string s)
 		player2 = "MOB0";
 	}
 	else {
-		player2 = "player 2";
+		player2 = "Player 2";
 	}
 
 
-	if (!circleText.loadFromFile("sirculo.png"))
+	/*if (!circleText.loadFromFile("sirculo2.png"))
 	{
 		printf("image error");
 	}
-	circleText.setSmooth(true);
+	circleText.setSmooth(true);*/
 
 
 	if (!backgroundTexture.loadFromFile("gradient2.jpg"))
@@ -288,6 +292,12 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 	window.setKeyRepeatEnabled(false);
 
+	//hilo principal de la ventana que gestiona el juego y los eventos de SFML (click, intro, input de teclado)
+
+	//usamos los metodos del modulo c para manejar el array 7x6
+	//meter ficha, comprobar si la columna está llena, vaciar columna, mirar si hay 4 en raya
+
+	//cuando termina una partida se guarda el resultado en la BD del jugador que ha iniciado sesion
 	while (window.isOpen())
 	{
 
@@ -301,7 +311,22 @@ IaGUI::IaGUI(bool mode,std::string s)
 		
 			if (!movres()) win = 3;
 			
-			
+			if (habPlayer) habText1.setOutlineColor(sf::Color::Green);
+			else habText1.setOutlineColor(sf::Color::Red);
+
+			if (habOtro) habText2.setOutlineColor(sf::Color::Green);
+			else habText2.setOutlineColor(sf::Color::Red);
+
+			if (text2.getString() == "1") colRect.setPosition(10, 210);
+			else if (text2.getString() == "2") colRect.setPosition(125, 210);
+			else if (text2.getString() == "3") colRect.setPosition(240, 210);
+			else if (text2.getString() == "4") colRect.setPosition(355, 210);
+			else if (text2.getString() == "5") colRect.setPosition(466, 210);
+			else if (text2.getString() == "6") colRect.setPosition(579, 210);
+			else if (text2.getString() == "7") colRect.setPosition(694, 210);
+			else colRect.setPosition(1000, 1100);
+
+			 
 
 			if (win == 0 && turn == '1' && go  && mode) {
 
@@ -317,7 +342,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 					
 					}
 				
-				
+					
 			
 			
 				if (winCheckMapa(2) == 2) {
@@ -332,28 +357,29 @@ IaGUI::IaGUI(bool mode,std::string s)
 				if (event.key.code == sf::Keyboard::Enter)
 				{
 
+					
 					try
 					{
 						s = text2.getString();
-						n -= 1;
+						//n -= 1;
 						n = stoi(s);
 					}
 					catch (const std::exception&)
 					{
-
+						printf("columna invalida\n");
 					}
 				
 				
-					if (win == 0 && turn == '1' && n >= 0 && n < 8 && go && !mode && llena(n) == 0)
+					if (win == 0 && turn == '1' && n >= 0 && n < 8 && go && !mode && llena(n) == 0 && text2.getString() != " ")
 					{
 
 						
 						if (n == 0 ) {
 							
-							if (habPlayer) {
+							if (habOtro) {
 								borrarColumna(rand() % 6);
-								habPlayer = false;
-								habText2.setOutlineColor(sf::Color::Red);
+								habOtro = false;
+								
 							}
 							else {
 								break;
@@ -363,6 +389,8 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 							meterFicha2("Player 1: ", player2char, n, 0);
 							moveCount++;
+							text2.setString(" ");
+							
 
 						
 						}
@@ -376,16 +404,16 @@ IaGUI::IaGUI(bool mode,std::string s)
 						
 					}
 					
-					if (win == 0 && turn == '2' && n >= 0 && n < 8 && go && llena(n) == 0)
+					if (win == 0 && turn == '2' && n >= 0 && n < 8 && go && llena(n) == 0 && text2.getString() != " ")
 					{
 
 		
 						if (n == 0) {
 
-							if (habOtro) {
+							if (habPlayer && !mode) {
 								borrarColumna(rand() % 7 + 1);
-								habOtro = false;
-								habText1.setOutlineColor(sf::Color::Red);
+								habPlayer = false;
+								
 
 							}
 							else {
@@ -396,6 +424,8 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 							meterFicha2("Player 1: ", player1char, n, 0);
 							moveCount++;
+							text2.setString(" ");
+							
 
 						}
 
@@ -422,12 +452,14 @@ IaGUI::IaGUI(bool mode,std::string s)
 				added = false;
 				IaGUI::changeTurn();
 				moveCount = 0;
+				habPlayer = true;
+				habOtro = true;
 
 			}
 			if (event.type == sf::Event::TextEntered)
 			{
 
-				if (event.text.unicode < 128)
+				if (std::isdigit(event.text.unicode))
 					text2.setString(event.text.unicode);
 
 			}
@@ -535,7 +567,8 @@ IaGUI::IaGUI(bool mode,std::string s)
 			go = true;
 		}
 
-	
+		
+		//actualizar ventana
 		window.clear();
 		
 		window.draw(panel);
@@ -560,7 +593,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 		window.draw(turnCircle);
 		window.draw(columnsText);
 
-
+		window.draw(colRect);
 		IaGUI::paintBoard();
 		window.draw(ggText);
 

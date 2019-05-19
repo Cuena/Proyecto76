@@ -63,12 +63,13 @@ Login::Login()
 
 					
 					if (isPlayer(inputUserText.getString())) {
+						printf("Inicio de sesion con cuenta ya existente\n");
 						window.close();
 						MainMenu(inputUserText.getString());
 						
 					}
 					else {
-						
+						printf("Nueva cuenta creada\n");
 						insert(inputUserText.getString());
 						writePlayer(inputUserText.getString());
 						window.close();
@@ -157,7 +158,7 @@ bool Login::isPlayer(std::string s)
 	while (getline(file, line)) {
 		if (line == s) { 
 
-			printf("Has iniciado sesión\n");
+			
 			return true; 
 		}
 	}

@@ -33,6 +33,7 @@ protected:
 	sf::Texture circleText;
 	sf::Texture backgroundTexture;
 	sf::String player1,player2, playerName;
+	sf::RectangleShape colRect;
 	int n;
 	std::string s = " ";
 
@@ -41,7 +42,6 @@ public:
 	IaGUI(bool mode,std::string s);
 	void changeTurn();
 	void paintBoard();
-	void updateGUI();
 	void initGUI();
 
 

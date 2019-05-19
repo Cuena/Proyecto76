@@ -177,7 +177,7 @@ void MainMenu::drawMenuItems()
 	menuQuitText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 400- 50);
 
 
-	if (!backTexture.loadFromFile("Black.jpg"))
+	if (!backTexture.loadFromFile("black-background.jpeg"))
 	{
 		// error...
 	}

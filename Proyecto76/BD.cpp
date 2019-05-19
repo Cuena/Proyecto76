@@ -88,7 +88,7 @@ int updateBD(std::string s) {
 	char *zErrMsg = 0;
 	int rc;
 	const char *sql;
-	const char* data = "Callback function called";
+	const char* data = "Callback function called\n";
 
 	db = abrirBD();
 
