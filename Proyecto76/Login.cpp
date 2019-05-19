@@ -12,7 +12,7 @@ Login::Login()
 	window.create(sf::VideoMode(700, 800), "Connect 4", sf::Style::Close);
 
 
-	if (!font.loadFromFile("SaucerBB.ttf"))
+	if (!font.loadFromFile("Pixeled.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
 		//window.close;
@@ -79,13 +79,17 @@ Login::Login()
 
 					
 					if (isPlayer(inputUserText.getString())) {
+						window.close();
 						MainMenu(inputUserText.getString());
+						
 					}
 					else {
 						printf("joder-> %s\n", inputUserText.getString());
 						insert(inputUserText.getString());
 						writePlayer(inputUserText.getString());
+						window.close();
 						MainMenu(inputUserText.getString());
+						
 					}
 
 
@@ -141,13 +145,13 @@ void Login::drawLoginItems()
 {
 	loginTitle.setFont(font);
 	loginTitle.setString("LOGIN");
-	loginTitle.setCharacterSize(70);
+	loginTitle.setCharacterSize(60);
 	loginTitle.setPosition(window.getSize().x / 2.0f - loginTitle.getLocalBounds().width / 2.0f - 5, 100);
 
 	userText.setFont(font);
-	userText.setString("Username: ");
-	userText.setCharacterSize(40);
-	userText.setPosition(window.getSize().x / 2.0f - 10 - 200, window.getSize().y / 2.0f - 100);
+	userText.setString("USERNAME: ");
+	userText.setCharacterSize(25);
+	userText.setPosition(window.getSize().x / 2.0f - 30 - 200, window.getSize().y / 2.0f - 100);
 
 	/*passwordText.setFont(font);
 	passwordText.setString("Password: ");
@@ -156,13 +160,13 @@ void Login::drawLoginItems()
 */
 	inputUserText.setFont(font);
 	inputUserText.setString(" ");
-	inputUserText.setCharacterSize(40);
-	inputUserText.setPosition(window.getSize().x / 2.0f - 10 + 50, window.getSize().y / 2.0f - 100);
+	inputUserText.setCharacterSize(25);
+	inputUserText.setPosition(window.getSize().x / 2.0f - 30 + 50, window.getSize().y / 2.0f - 100);
 
 	inputPasswordText.setFont(font);
 	inputPasswordText.setString(" ");
-	inputPasswordText.setCharacterSize(40);
-	inputPasswordText.setPosition(window.getSize().x / 2.0f - 10 + 50, window.getSize().y / 2.0f);
+	inputPasswordText.setCharacterSize(25);
+	inputPasswordText.setPosition(window.getSize().x / 2.0f - 30 + 50, window.getSize().y / 2.0f);
 
 
 

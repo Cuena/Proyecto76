@@ -168,7 +168,7 @@ int insert() {
 	/* Create SQL statement */
 	sql = "INSERT INTO PLAYER "  \
 		"VALUES ('KIKE', 'ZZZ', 0, 0, 0, 0, 0, 0);";
-
+	
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callback, 0, &zErrMsg);
 
@@ -196,7 +196,7 @@ int insert(std::string s) {
 	
 	
 	const char* result = "";
-	printf("bd: %s\n", s);
+	//printf("bd: %s\n", s);
 	str = "INSERT INTO PLAYER VALUES ('";
 	str += s;
 	str += "',";

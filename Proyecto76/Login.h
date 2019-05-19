@@ -1,7 +1,10 @@
 #pragma once
+#define _CRT_SECURE_NO_WARNINGS
+#pragma warning( disable : 4789 )
 using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include<fstream>
 
 class Login
 {
@@ -26,6 +29,7 @@ public:
 
 	void drawLoginItems();
 	void update();
+	
 
 	int readSize();
 	bool isPlayer(std::string s);
