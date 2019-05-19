@@ -133,6 +133,15 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 					if (winCheckMapa(1) == 1) {
 
 						printf("HA GANADO 1");
+						const char* result2 = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str += name;
+						str += "';";
+						result2 = str.c_str();
+
+						updateBD(result2);
 
 						*fin = false;
 					}
@@ -146,7 +155,7 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 						const char* result2 = "";
 						std::string str;
 
-						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str = "UPDATE PLAYER SET WINSONLINE = WINSONLINE + 1 WHERE NAME = '";
 						str += name;
 						str += "';";
 						result2 = str.c_str();
@@ -160,6 +169,20 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
 
 					*toca = true;
+					if (winCheckMapa(2) == 2) {
+
+						printf("HA GANADO 2");
+						const char* result2 = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str += name;
+						str += "';";
+						result2 = str.c_str();
+
+						updateBD(result2);
+						*fin = false;
+					}
 				}
 				pintar2();
 				printf("%c\n", *jugador);

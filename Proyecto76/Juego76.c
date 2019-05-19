@@ -65,7 +65,7 @@ int winCheckMapa(int i) {
 	int HEIGHT = 7;
 	int WIDTH = 7;
 	int EMPTY_SLOT = '0';
-	pintar2();
+	
 	for (int r = 1; r < HEIGHT; r++) {
 		for (int c = 0; c < WIDTH; c++) {
 			int player = mapa[r][c];
@@ -344,7 +344,7 @@ int NegaMax(int Depth) // MiniMax algorithm in NegaMax form
 				if (winCheckMapa(p) != 0)
 				{
 					PlayOut++;
-					if (XO == 'O')
+					if (XO == '2')
 						EVA++;
 					else
 						EVA--;
