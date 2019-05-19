@@ -80,16 +80,16 @@ void update(SOCKET sock, char buf[4096], char* jugador, bool* toca) {
 }
 
 
-void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin) {
-	
+void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, string name) {
+
 	int pri = 1;
 
 
 
 
-	while (*fin==true) {
+	while (*fin == true) {
 
-	
+
 		int bytesRecieved = recv(sock, buf, 4096, 0);
 
 		if (bytesRecieved > 0) {
@@ -114,7 +114,15 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin) {
 					if (winCheckMapa(1) == 1) {
 
 						printf("HA GANADO 1");
+						const char* result2 = "";
+						std::string str;
 
+						str = "UPDATE PLAYER SET WINSONLINE = WINSONLINE + 1 WHERE NAME = '";
+						str += name;
+						str += "';";
+						result2 = str.c_str();
+
+						updateBD(result2);
 						*fin = false;
 					}
 					*toca = false;
@@ -135,39 +143,28 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin) {
 
 						printf("HA GANADO 2");
 
+						const char* result2 = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str += name;
+						str += "';";
+						result2 = str.c_str();
+
+						updateBD(result2);
 						*fin = false;
 					}
 					*toca = false;
 				}
 				else if (*jugador == '1' && !*toca) {
 					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
-					if (winCheckMapa(2) == 2) {
 
-						printf("HA GANADO 2");
-
-						*fin = false;
-					}
 					*toca = true;
 				}
 				pintar2();
-				printf("%c \n", *jugador);
-
-				//if (winCheckMapa(*jugador-'0') == 1) {
-
-				//	printf("HA GANADO 1");
-				//	
-				//	*fin = false;
-				//}
-				//if (winCheckMapa(*jugador - '0') == 2) {
-
-				//	printf("HA GANADO EL JUGADOR 2");
-				//	
-				//	*fin=false;
-
-				//}
+				printf("%c\n", *jugador);
 
 			}
-
 
 		}
 
@@ -176,30 +173,31 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin) {
 }
 
 
-Client2::Client2()
+Client2::Client2(string s)
 {
 	int contador = 0;
+	playerNameC = s;
 	connectServer();
 
 	int pri = 1;
 
-	
 
 
 
 
 
-	
+
+
 
 
 	//std::thread t{ f,sock,buf,jugador,toca };
 	//int bytesRecieved = recv(sock, buf, 4096, 0);
-	thread t1(hola, sock, buf, jugador, toca,fin);
+	thread t1(hola, sock, buf, jugador, toca, fin, playerNameC);
 	t1.detach();
 	crearMapa();
 	//pintar2();
-	
-	
+
+
 	//if (bytesRecieved > 0) {
 
 	//	//Echo response to console
@@ -207,7 +205,7 @@ Client2::Client2()
 	//	std::cout << "SERVER> " << std::string(buf, 0, bytesRecieved) << std::endl;
 
 	//}
-	
+
 
 	do {
 
@@ -216,7 +214,7 @@ Client2::Client2()
 			t1.~thread();
 			break;
 		}
-		
+
 		getline(std::cin, userInput);
 		if (userInput == "Exit") {
 			*fin = false;
@@ -225,12 +223,14 @@ Client2::Client2()
 			//MainMenu();
 			break;
 		}
-		if (*toca&&userInput!=""&&(userInput.at(0)-'0')<8&& (userInput.at(0) - '0')>0) {
+
+		if (*toca&&userInput != "" && (userInput.at(0) - '0') < 8 && (userInput.at(0) - '0') > 0) {
+
 			int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
 		}
-		
-		
-		
+
+
+
 		//if (sendResult != SOCKET_ERROR) {
 		//	//wait for response
 		//	ZeroMemory(buf, 4096);
@@ -249,7 +249,7 @@ Client2::Client2()
 	} while (true);
 
 	//gracefully cole down everything
-	
+
 	printf("Se acabo\n");
 	closesocket(sock);
 	WSACleanup();
