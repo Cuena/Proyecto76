@@ -5,9 +5,6 @@
 #include <string.h>
 #include <string>
 #include "BD.h"
-
-//#include "MainMenu.h"
-
 #include <windows.h>
 
 #pragma once
@@ -17,7 +14,7 @@ class Options
 public:
 	
 	Options();
-	//Options();
+	
 	virtual ~Options();
 
 	
@@ -25,7 +22,6 @@ public:
 
 	sf::Text optionsTitle;
 	sf::Text musicText;
-	//sf::Text leaderboardText;
 	sf::Text playText;
 	sf::Text t2;
 
@@ -46,9 +42,6 @@ public:
 
 	void initOptions();
 	void update();
-
-	void openFolder();
-
 	void openFolder2();
 
 	

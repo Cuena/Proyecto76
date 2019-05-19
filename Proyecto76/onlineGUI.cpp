@@ -6,17 +6,13 @@
 onlineGUI::onlineGUI()
 {
 	window.create(sf::VideoMode(800, 800), "Connect 4", sf::Style::Close);
-
 	circle.setRadius(38);
 	circle.setPointCount(300);
 	circle.setOutlineThickness(-3);
 	circle.setOutlineColor(sf::Color::Black);
-
 	rect.setSize( sf::Vector2f(800, 800));
 	rect.setFillColor(sf::Color(54, 86, 124));
 
-
-	
 
 	while (window.isOpen()) {
 		sf::Event event;
@@ -31,10 +27,8 @@ onlineGUI::onlineGUI()
 		}
 
 		window.clear();
-
 		window.draw(rect);
 		pintalo();
-
 		window.display();
 	}
 }
@@ -53,7 +47,7 @@ void  onlineGUI::pintalo() {
 	{
 		for (int j = 0; j < 7; j++) {
 
-			//circle.setPosition(7 + 90 * (i % 7), 7 + 90 * (i / 7));
+			
 			circle.setPosition(800 / 7 * i + 20, 800 / 6 * j + 20 );
 			if (mapaxd[j + 1][i] == '1')
 				circle.setFillColor(sf::Color::Blue);

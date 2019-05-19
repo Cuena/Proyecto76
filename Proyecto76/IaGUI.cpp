@@ -2,11 +2,6 @@
 #include "IaGUI.h"
 #include "MainMenu.h"
 #include "BD.h"
-//int WIDTH = 800;
-//int HEIGHT = 800;
-//char turn = '1';
-//bool added;
-//bool go;
 
 
 	
@@ -58,14 +53,14 @@ void IaGUI::updateGUI()
 
 void IaGUI::initGUI()
 {
-	//sf::RectangleShape board(sf::Vector2f(800, 800));
+	
 	board.setSize(sf::Vector2f(800, 800));
 	board.setFillColor(sf::Color(61, 68, 86));
 	board.setOutlineColor(sf::Color::Black);
 	board.setOutlineThickness(5);
 	board.setPosition(0, 200);
 
-	//sf::RectangleShape scoreboard(sf::Vector2f(1000, 200));
+	
 	scoreboard.setSize(sf::Vector2f(800, 200));
 	scoreboard.setFillColor(sf::Color(3, 26, 61));
 	scoreboard.setOutlineColor(sf::Color::Black);
@@ -73,9 +68,8 @@ void IaGUI::initGUI()
 	scoreboard.setPosition(0, 0);
 
 
-	//sf::RectangleShape panel(sf::Vector2f(400, 1000));
+	
 	panel.setSize(sf::Vector2f(400, 1000));
-	//panel.setFillColor(sf::Color(3, 26, 61));
 	panel.setOutlineColor(sf::Color::Black);
 	panel.setOutlineThickness(5);
 	panel.setPosition(800, 000);
@@ -83,52 +77,50 @@ void IaGUI::initGUI()
 
 
 
-	//sf::Text text;
+
 	text.setFont(font);
 	text.setString("NUMERO DE COLUMNA");
-	text.setCharacterSize(18); // in pixels, not points!
+	text.setCharacterSize(18); 
 	text.setFillColor(sf::Color::White);
 	text.setStyle(sf::Text::Bold);
 	text.setPosition(820, 600);
 
-	//sf::Text turnText;
+	
 	turnText.setFont(font);
 	turnText.setString("TURNO");
-	turnText.setCharacterSize(18); // in pixels, not points!
+	turnText.setCharacterSize(18);
 	turnText.setFillColor(sf::Color::White);
 	turnText.setStyle(sf::Text::Bold);
 	turnText.setPosition(900, 350);
 
-	//sf::Text text2;
+	
 	text2.setFont(font);
 	text2.setString(" ");
-	text2.setCharacterSize(30); // in pixels, not points!
+	text2.setCharacterSize(30); 
 	text2.setFillColor(sf::Color::White);
 	text2.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	text2.setPosition(925, 650);
 
-	//sf::Text score1;
+	
 	score1.setFont(font);
 	score1.setString(" ");
-	score1.setCharacterSize(50); // in pixels, not points!
+	score1.setCharacterSize(50); 
 	score1.setFillColor(cBlue);
 	score1.setOutlineThickness(2);
-
 	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	score1.setPosition(330, 60);
 	score1.setString(std::to_string(twoscore));
 	score1.setOutlineColor(sf::Color::White);
 
-	//sf::Text score2;
+
 	score2.setFont(font);
 	score2.setString(" ");
-	score2.setCharacterSize(50); // in pixels, not points!
+	score2.setCharacterSize(50); 
 	score2.setFillColor(cYellow);
 	score2.setOutlineThickness(2);
 	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
 	score2.setPosition(430, 60);
 	score2.setString(std::to_string(onescore));
-	
 	score2.setOutlineColor(sf::Color::Black);
 
 
@@ -144,36 +136,28 @@ void IaGUI::initGUI()
 	turnCircle.setOutlineColor(sf::Color::Black);
 	turnCircle.setPosition(895, 400);
 
-	//sf::RectangleShape restart(sf::Vector2f(175, 50));
+	
 	restart.setSize(sf::Vector2f(175, 50));
 	restart.setFillColor(sf::Color(255, 150, 0));
 	restart.setPosition(855, 850);
 	restart.setOutlineColor(sf::Color::Black);
 	restart.setOutlineThickness(1);
 
-	//sf::Text restartText;
+
 	restartText.setFont(font);
 	restartText.setString("Restart");
 	restartText.setCharacterSize(35);
-	//restartText.setColor(sf::Color::Black);
 	restartText.setPosition(875, 850);
 
 
-	//	/*sf::RectangleShape overlay(sf::Vector2f(630, 630));
-	//	overlay.setFillColor(sf::Color(150, 150, 150, 150));
-	//*/
-	//sf::Text ggText;
+
 	ggText.setFont(font);
 	ggText.setCharacterSize(150);
 	ggText.setOutlineColor(sf::Color::Magenta);
 	ggText.setOutlineThickness(10);
 	ggText.setFillColor(sf::Color::Black);
 
-	/*rectWin.setSize(sf::Vector2f(700, 200));
-	rectWin.setFillColor(sf::Color(54, 86, 124));
-	rectWin.setOutlineColor(sf::Color::Black);
-	rectWin.setOutlineThickness(5);
-	rectWin.setPosition(200, 000);*/
+
 	p1Text.setFont(font);
 	p1Text.setString(player1);
 	p1Text.setCharacterSize(32); 
@@ -216,7 +200,8 @@ void IaGUI::initGUI()
 
 	if (!texture.loadFromFile("Mob0.png"))
 	{
-		// error...
+
+		std::cout << "Error al cargar la textura" << std::endl;
 	}
 	texture.setSmooth(true);
 	sprite.setTexture(texture);
@@ -228,20 +213,11 @@ void IaGUI::initGUI()
 
 IaGUI::IaGUI(bool mode,std::string s)
 {
-	
-	
 	window.create(sf::VideoMode(1075, 1000), "Game", sf::Style::Close, settings);
-	
 	bool habPlayer = true;
 	bool habOtro = true;
 	playerName = s;
-	//for (int i = 1; i < 8; ++i)
-	//{
-	//	for (int j = 0; j < 7; j++)
-	//	{
-	//		mapaxd[i][j] = '0';
-	//	}
-	//}
+
 	cBlue.r = 37;
 	cBlue.g = 91;
 	cBlue.b = 178;
@@ -273,7 +249,6 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 	
 	player1 = playerName;
-	//player2 = "PLAYER 2";
 	int moveCount = 0;
 
 	char str[3];
@@ -287,23 +262,18 @@ IaGUI::IaGUI(bool mode,std::string s)
 	settings.antialiasingLevel = 8;
 	
 
-	
 
-	//sf::RectangleShape background(sf::Vector2f(800, 800));
-	//background.setFillColor(sf::Color(238, 38, 38));
-	//font = m->getFont;
-	
 	if (!font.loadFromFile("SaucerBB.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
-		//window.close;
+	
 	}
 
 	
 	
 	initGUI();
 
-	//char grid[7][6];//SFML //SFML
+
 
 
 
@@ -314,9 +284,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 	moveCount = 0;
 	
 
-	/*bool tileDropped = false, currentRed = true;
-	int column = 0, newTile = 0, hoverTile = 0, moveCounter = 0;
-	Tile winner = NONE;*/
+
 
 	window.setKeyRepeatEnabled(false);
 
@@ -330,30 +298,30 @@ IaGUI::IaGUI(bool mode,std::string s)
 				window.close();
 			
 			
-			//if (moveCount == 42) win = 3;
+		
 			if (!movres()) win = 3;
 			
 			
 
 			if (win == 0 && turn == '1' && go  && mode) {
 
-				
+					//llamada al algoritmo de la IA
 					int prueba = AIManager();
 					printf("La prueba ha decidido que se meta en: %i \n", prueba);
 					if (prueba != 0) {
 						meterFicha2("", player2char, prueba, 0);
 					}
-					else {
+					else { //en caso de que suceda el bug de la ia se pone en una columna random
 						do { prueba = rand() % 7 + 1; } while (llena(prueba)!=0);
 						meterFicha2("", player2char, prueba, 0);
 					
 					}
-					//pintar2();
+				
 				
 			
 			
 				if (winCheckMapa(2) == 2) {
-					//printf("No eres un reto \n");
+					
 					win = 2;
 				}
 
@@ -375,12 +343,11 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 					}
 				
-					//meterFicha2("Player 2: ", player2char);
+				
 					if (win == 0 && turn == '1' && n >= 0 && n < 8 && go && !mode && llena(n) == 0)
 					{
 
-						/*meterFicha2("Player 1: ", player2char, n, 0);
-						moveCount++;*/
+						
 						if (n == 0 ) {
 							
 							if (habPlayer) {
@@ -397,17 +364,14 @@ IaGUI::IaGUI(bool mode,std::string s)
 							meterFicha2("Player 1: ", player2char, n, 0);
 							moveCount++;
 
-							//pintar2();
+						
 						}
 
 							if (winCheckMapa(2) == 2) {
-								//printf("Has tenido suerte \n");
+								
 								win = 2;
 							}
-							//paintBoard();
-							/*paintBoard();
 
-							changeTurn();*/
 							go = false;
 						
 					}
@@ -415,9 +379,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 					if (win == 0 && turn == '2' && n >= 0 && n < 8 && go && llena(n) == 0)
 					{
 
-						/*meterFicha2("Player 1: ", player1char, n, 0);
-						moveCount++;*/
-
+		
 						if (n == 0) {
 
 							if (habOtro) {
@@ -437,16 +399,13 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 						}
 
-							//pintar2();
+						
 
 							if (winCheckMapa(1) == 1) {
-								//printf("Has tenido suerte \n");
+								
 								win = 1;
 							}
-							//paintBoard();
-							/*paintBoard();
 
-							changeTurn();*/
 							go = false;
 						
 					}
@@ -459,8 +418,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 				crearMapa();
 				ggText.setString("");
 				win = 0;
-				/*moveCounter = 0;
-				winner = NONE;*/
+
 				added = false;
 				IaGUI::changeTurn();
 				moveCount = 0;
@@ -470,7 +428,6 @@ IaGUI::IaGUI(bool mode,std::string s)
 			{
 
 				if (event.text.unicode < 128)
-					//std::cout << "ASCII character typed: " << static_cast<char>(event.text.unicode) << std::endl;
 					text2.setString(event.text.unicode);
 
 			}
@@ -484,7 +441,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 				if (win == 1)
 				{
 
-					//overlay.setFillColor(sf::Color(255, 0, 0, 150));
+				
 					ggText.setString("Blue Wins!");
 					ggText.setPosition(100,400 );
 					onescore++;
@@ -514,7 +471,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 						updateBD(result);
 					}
 					score1.setString(std::to_string(onescore));
-					//std::cout << onescore << "\n";
+				
 					added = true;
 					IaGUI::changeTurn();
 
@@ -523,7 +480,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 				else if (win == 2)
 				{
 					
-					//overlay.setFillColor(sf::Color(255, 255, 0, 150));
+					
 					ggText.setString("Yellow Wins!");
 					ggText.setPosition(100, 400);
 					twoscore++;
@@ -559,7 +516,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 				}
 				else
 				{
-					//overlay.setFillColor(sf::Color(150, 150, 150, 150));
+					
 					ggText.setString("Draw!");
 					ggText.setPosition(180, 260);
 					added = true;
@@ -567,13 +524,12 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 
 				}
-				//window.draw(overlay);
+			
 
 			}
 			}
 
-		//}
-		//paintBoard();
+	
 		if (!go) {
 			IaGUI::changeTurn();
 			go = true;
@@ -583,12 +539,12 @@ IaGUI::IaGUI(bool mode,std::string s)
 		window.clear();
 		
 		window.draw(panel);
-		//window.draw(background);
+	
 		window.draw(board);
 		window.draw(scoreboard);
 		window.draw(text);
 		window.draw(text2);
-		//window.draw(overlay);
+		
 		window.draw(ggText);
 
 		window.draw(score1);
@@ -617,7 +573,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 	}
 
 
-	//return 0;
+	
 }
 
 

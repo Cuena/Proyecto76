@@ -1,6 +1,6 @@
 #include "prueba.h"
 
-
+//CLASE DE PRUEBA QUE HA GENERADO PROBLEMAS CON GITHUB EN CASO DE BORRARLA
 
 prueba::prueba()
 {

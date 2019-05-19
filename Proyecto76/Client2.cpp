@@ -2,84 +2,9 @@
 #include "MainMenu.h"
 
 
-void update(SOCKET sock, char buf[4096], char* jugador, bool* toca) {
-
-	int pri = 1;
 
 
-
-
-	while (true) {
-
-		int bytesRecieved = recv(sock, buf, 4096, 0);
-
-		if (bytesRecieved > 0) {
-
-			//Echo response to console
-			if (pri == 1) {
-				std::cout << "SERVER> " << std::string(buf, 0, bytesRecieved) << "\n" << std::endl;
-				char a = std::string(buf, 0, bytesRecieved).at(0);
-				jugador = &a;
-				if (*jugador == '1') {
-
-					*toca = true;
-				}
-				pri = 0;
-			}
-
-			else {
-				std::cout << std::string(buf, 0, bytesRecieved).at(0) << "\n" << std::endl;
-
-				if (*jugador == '1'&&*toca) {
-					meterFicha2("", player1char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
-					*toca = false;
-
-
-				}
-				else if (*jugador == '2' && !*toca) {
-					meterFicha2("", player1char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
-					*toca = true;
-				}
-				else if (*jugador == '2' && *toca) {
-					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
-					*toca = false;
-				}
-				else if (*jugador == '1' && !*toca) {
-					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
-					*toca = true;
-				}
-				pintar2();
-
-
-				if (winCheckMapa(1) == 1) {
-
-					printf("HA GANADO EL JUGADOR 1");
-					system("pause");
-
-				}
-
-				if (winCheckMapa(2) == 2) {
-
-					printf("HA GANADO EL JUGADOR 2");
-					system("pause");
-
-
-				}
-
-			}
-
-
-		}
-
-
-	}
-
-
-
-
-}
-
-
+//metodo al cual llama el hilo para recibir datos del servidor
 void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, string name) {
 
 	int pri = 1;
@@ -113,7 +38,7 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 					meterFicha2("", player1char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
 					if (winCheckMapa(1) == 1) {
 
-						printf("HA GANADO 1");
+						printf("HA GANADO 1\n");
 						const char* result2 = "";
 						std::string str;
 
@@ -132,7 +57,16 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 					*toca = true;
 					if (winCheckMapa(1) == 1) {
 
-						printf("HA GANADO 1");
+						printf("HA GANADO 1\n");
+						const char* result2 = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str += name;
+						str += "';";
+						result2 = str.c_str();
+
+						updateBD(result2);
 
 						*fin = false;
 					}
@@ -141,12 +75,12 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
 					if (winCheckMapa(2) == 2) {
 
-						printf("HA GANADO 2");
+						printf("HA GANADO 2\n");
 
 						const char* result2 = "";
 						std::string str;
 
-						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str = "UPDATE PLAYER SET WINSONLINE = WINSONLINE + 1 WHERE NAME = '";
 						str += name;
 						str += "';";
 						result2 = str.c_str();
@@ -160,6 +94,24 @@ void hola(SOCKET sock, char buf[4096], char* jugador, bool* toca, bool* fin, str
 					meterFicha2("", player2char, std::string(buf, 0, bytesRecieved).at(0) - '0', 0);
 
 					*toca = true;
+					if (winCheckMapa(2) == 2) {
+
+						printf("HA GANADO 2\n");
+
+						const char* result2 = "";
+						std::string str;
+
+						str = "UPDATE PLAYER SET LOSESONLINE = LOSESONLINE + 1 WHERE NAME = '";
+						str += name;
+						str += "';";
+						result2 = str.c_str();
+
+						updateBD(result2);
+
+
+
+						*fin = false;
+					}
 				}
 				pintar2();
 				printf("%c\n", *jugador);
@@ -178,34 +130,10 @@ Client2::Client2(string s)
 	int contador = 0;
 	playerNameC = s;
 	connectServer();
-
 	int pri = 1;
-
-
-
-
-
-
-
-
-
-
-	//std::thread t{ f,sock,buf,jugador,toca };
-	//int bytesRecieved = recv(sock, buf, 4096, 0);
 	thread t1(hola, sock, buf, jugador, toca, fin, playerNameC);
 	t1.detach();
 	crearMapa();
-	//pintar2();
-
-
-	//if (bytesRecieved > 0) {
-
-	//	//Echo response to console
-
-	//	std::cout << "SERVER> " << std::string(buf, 0, bytesRecieved) << std::endl;
-
-	//}
-
 
 	do {
 
@@ -218,39 +146,17 @@ Client2::Client2(string s)
 		getline(std::cin, userInput);
 		if (userInput == "Exit") {
 			*fin = false;
-			//t1.join();
 			t1.~thread();
-			//MainMenu();
 			break;
 		}
-
+		//enviar el dato introducido si y solo si es un número del 1 al 8
 		if (*toca&&userInput != "" && (userInput.at(0) - '0') < 8 && (userInput.at(0) - '0') > 0) {
-
 			int sendResult = send(sock, userInput.c_str(), userInput.size() + 1, 0);
 		}
-
-
-
-		//if (sendResult != SOCKET_ERROR) {
-		//	//wait for response
-		//	ZeroMemory(buf, 4096);
-		//	int bytesRecieved = recv(sock, buf, 4096, 0);
-
-		//	if (bytesRecieved > 0) {
-
-		//		//Echo response to console
-		//		
-		//		std::cout << "SERVER> " << std::string(buf, 0, bytesRecieved) << std::endl;
-		//		
-		//	}
-
-		//}
-
 	} while (true);
-
-	//gracefully cole down everything
-
+	//print que indica que se ha desconectado el cliente del servidor
 	printf("Se acabo\n");
+	//limpieza de sockets
 	closesocket(sock);
 	WSACleanup();
 
@@ -259,7 +165,7 @@ Client2::Client2(string s)
 
 
 
-
+//Inicializar la libreria winSock
 void Client2::winSockInit()
 {
 	ver = MAKEWORD(2, 2);
@@ -274,21 +180,21 @@ void Client2::winSockInit()
 
 }
 
-
+//crear el socket y "bindearlo" a un puerto y una ip
 void Client2::connectServer()
 {
 	winSockInit();
 
-	//create the socket
+	
 	sock = socket(AF_INET, SOCK_STREAM, 0);
 	if (sock == INVALID_SOCKET) {
 
-		printf("no skerea");
+		printf("Error al crear el Socket");
 		WSACleanup();
 		return;
 	}
 
-	//fill in a hint structure
+	//"Bindear" el socket
 
 	sockaddr_in hint;
 	hint.sin_family = AF_INET;
@@ -298,7 +204,7 @@ void Client2::connectServer()
 	int connResult = connect(sock, (sockaddr*)&hint, sizeof(hint));
 
 	if (connResult == SOCKET_ERROR) {
-		printf("mierda");
+		printf("No se ha podido establecer la conexión");
 		*fin = false;
 		closesocket(sock);
 		WSACleanup();
