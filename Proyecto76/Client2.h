@@ -11,6 +11,8 @@ extern "C" {
 #include <iostream>
 #include <sstream>
 
+#include "BD.h"
+
 
 
 #pragma comment (lib, "ws2_32.lib")
@@ -31,10 +33,14 @@ private:
 	bool* toca=&toca2;
 	bool fin2 = true;
 	bool* fin = &fin2;
+
+	
 	
 
 public:
+	string playerNameC;
 	
+	Client2(string s);
 	Client2();
 	void winSockInit();
 	void connectServer();

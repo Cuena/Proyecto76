@@ -39,6 +39,9 @@ void buscarLibre2(char a);
 int llena(int a);
 int winCheckMapa(int i);
 
+void borrarColumna(int c);
+void borrarFila(int f);
+
 bool movres();
 int AIManager();
 int NegaMax(int Depth);

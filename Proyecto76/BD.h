@@ -17,7 +17,7 @@ int crearBD();
 int createTable();
 int insert();
 int select(std::string s);
-int update(std::string s);
+int updateBD(std::string s);
 int insert(std::string s);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 

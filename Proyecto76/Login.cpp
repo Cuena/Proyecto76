@@ -9,7 +9,7 @@
 
 Login::Login()
 {
-	window.create(sf::VideoMode(700, 800), "Connect 4", sf::Style::Close);
+	window.create(sf::VideoMode(700, 800), "Login", sf::Style::Close);
 
 
 	if (!font.loadFromFile("Pixeled.ttf"))
