@@ -3,10 +3,8 @@ using namespace std;
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
-
 #include "onlineGUI.h"
 #include "Client2.h"
-//#include "Options.h"
 #include <thread>
 #include <iostream>
 #include <cstdlib>
@@ -25,13 +23,9 @@ public:
 	int col = 0;
 
 	std::string playerName;
-
 	sf::CircleShape menuCircle;
-
 	sf::RenderWindow window;
-
 	sf::Music music;
-
 	sf::Text menuTitle;
 	sf::Text menuPlayText;
 	sf::Text menuPlayIAText;
@@ -39,18 +33,10 @@ public:
 	sf::Text menuOptionsText;
 	sf::Text menuQuitText;
 	sf::Text statsText;
-
 	sf::Texture backTexture;
 	sf::Sprite backSprite;
-
 	std::string songPath;
-
-	//sf::Vertex line[2];
-
-	//sf::Vertex line2[2];
-
 	sf::Font font;
-
 	sf::Font getFont();
 
 	

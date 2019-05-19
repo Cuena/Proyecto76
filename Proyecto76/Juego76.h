@@ -46,11 +46,8 @@ bool movres();
 int AIManager();
 int NegaMax(int Depth);
 
-//int findBestMove();
-//int mixmax(int nivel, bool player);
 //estos dos metodos no los usamos en la demo, pero se usaran mas tarde para cargar tableros personalizados que vayamos creando
 void crearFich(char* nombre, char mapaG[][7]);
 void leerFich(char* nombre);
-
-
 #endif JUEGO76_H_
+

@@ -24,30 +24,20 @@ MainMenu::MainMenu(std::string s)
 	
 	
 	playerName = s;
-	//printf("MENU: %s\n", playerName);
+
 	
 	if (!font.loadFromFile("Pixeled.ttf"))
 	{
 		std::cout << "Failed to load resources.\n\n";
-		//window.close;
+		
 	}
 	
-	//try {
 
-	//	(!music.openFromFile("plastic love.wav"));
-	//}
-	//catch (int e) {}
-	//	
-	//music.setVolume(50);
-	////music.play();
 
 	menuCircle.setRadius(10);
-	//menuCircle.setPointCount(300);
 	menuCircle.setOutlineThickness(6);
 	menuCircle.setOutlineColor(sf::Color(24, 140, 124));
-
 	menuCircle.setPosition(window.getSize().x / 2 - 110 - 100, window.getSize().y / 2 - 100 -50);
-	//menuCircle.setPosition(screenWidth / 2 - getSize().x / 2, screenHeight / 2 - getSize().y / 2);
 	drawMenuItems();
 	
 	while (window.isOpen()) {
@@ -138,14 +128,13 @@ MainMenu::~MainMenu()
 }
 
  sf::Font MainMenu::getFont()
-{
-	 
+{	 
 	return font;
 }
 
 void MainMenu::drawMenuItems()
 {
-	col = rand() % 4 -4;
+	
 	
 
 
@@ -195,7 +184,7 @@ void MainMenu::drawMenuItems()
 	backTexture.setSmooth(true);
 	backSprite.setTexture(backTexture);
 	backSprite.setPosition(0,0);
-	//backSprite.setScale(sf::Vector2f(2.f, 2.f));
+	
 	
 	
 }
