@@ -5,9 +5,10 @@
 
 Options::Options()
 {
-	window.create(sf::VideoMode(700, 800), "Options", sf::Style::Close);
+	window.create(sf::VideoMode(700, 800), "Music	", sf::Style::Close);
 	selectedOptionsItem = 0;
 	mode = 0;
+	
 	
 
 	if (!font.loadFromFile("Pixeled.ttf"))
@@ -53,6 +54,7 @@ Options::Options()
 						catch (int e) {}
 
 						musicOptions.setVolume(50);
+						musicOptions.setLoop(true);
 						musicOptions.play();
 					}
 					
@@ -122,7 +124,7 @@ Options::~Options()
 void Options::initOptions()
 {
 	optionsTitle.setFont(font);
-	optionsTitle.setString("OPTIONS");
+	optionsTitle.setString("MUSIC");
 	optionsTitle.setCharacterSize(60);
 	optionsTitle.setPosition(window.getSize().x / 2.0f - optionsTitle.getLocalBounds().width / 2.0f - 5, 100);
 
@@ -135,7 +137,7 @@ void Options::initOptions()
 	leaderboardText.setString("Leaderboard");
 	leaderboardText.setCharacterSize(40);
 	leaderboardText.setPosition(window.getSize().x / 2.0f - 10 - 100, window.getSize().y / 2.0f);
-*/
+	*/
 	playText.setFont(font);
 	playText.setString("Play song");
 	playText.setCharacterSize(25);

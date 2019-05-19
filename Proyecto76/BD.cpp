@@ -88,7 +88,7 @@ int select(std::string s) {
 	return 0;
 }
 
-int update(std::string s) {
+int updateBD(std::string s) {
 	sqlite3 *db;
 	char *zErrMsg = 0;
 	int rc;

@@ -31,11 +31,11 @@ void IaGUI::paintBoard() {
 			//circle.setPosition(7 + 90 * (i % 7), 7 + 90 * (i / 7));
 			circle.setPosition(800 / 7 * i + 20, 800 / 6 * j + 20 + 200);
 			if (mapaxd[j + 1][i] == '1') {
-				circle.setFillColor(cBlue);//blue
+				circle.setFillColor(sf::Color::Blue);//blue
 				
 			}
 			else if (mapaxd[j + 1][i] == '2')
-				circle.setFillColor(cYellow);//yellow
+				circle.setFillColor(sf::Color::Yellow);//yellow
 			else
 				circle.setFillColor(sf::Color(138, 138, 138));
 			window.draw(circle);
@@ -115,7 +115,7 @@ void IaGUI::initGUI()
 	score1.setOutlineThickness(2);
 
 	score1.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score1.setPosition(330, 70);
+	score1.setPosition(330, 60);
 	score1.setString(std::to_string(twoscore));
 	score1.setOutlineColor(sf::Color::White);
 
@@ -126,7 +126,7 @@ void IaGUI::initGUI()
 	score2.setFillColor(cYellow);
 	score2.setOutlineThickness(2);
 	score2.setStyle(sf::Text::Bold | sf::Text::Underlined);
-	score2.setPosition(430, 70);
+	score2.setPosition(430, 60);
 	score2.setString(std::to_string(onescore));
 	
 	score2.setOutlineColor(sf::Color::Black);
@@ -176,17 +176,36 @@ void IaGUI::initGUI()
 	rectWin.setPosition(200, 000);*/
 	p1Text.setFont(font);
 	p1Text.setString(player1);
-	p1Text.setCharacterSize(32); // in pixels, not points!
+	p1Text.setCharacterSize(32); 
 	p1Text.setFillColor(sf::Color::White);
 	p1Text.setStyle(sf::Text::Bold);
-	p1Text.setPosition(70, 85);
+	p1Text.setPosition(145, 80);
 
 	p2Text.setFont(font);
 	p2Text.setString(player2);
-	p2Text.setCharacterSize(32); // in pixels, not points!
+	p2Text.setCharacterSize(32);
 	p2Text.setFillColor(sf::Color::White);
 	p2Text.setStyle(sf::Text::Bold);
-	p2Text.setPosition(550, 85);
+	p2Text.setPosition(550, 80);
+
+	habText1.setFont(font);
+	habText1.setString("0: SKILL");
+	habText1.setCharacterSize(18);
+	habText1.setFillColor(sf::Color::White);
+	habText1.setStyle(sf::Text::Bold);
+	habText1.setPosition(140, 60);
+	habText1.setOutlineColor(sf::Color::Green);
+	habText1.setOutlineThickness(1);
+
+	habText2.setFont(font);
+	habText2.setString("0: SKILL");
+	habText2.setCharacterSize(18);
+	habText2.setFillColor(sf::Color::White);
+	habText2.setStyle(sf::Text::Bold);
+	habText2.setPosition(560, 60);
+	habText2.setOutlineColor(sf::Color::Green);
+	habText2.setOutlineThickness(1);
+
 
 	columnsText.setFont(font);
 	columnsText.setString("1          2           3           4          5           6          7");
@@ -211,8 +230,10 @@ IaGUI::IaGUI(bool mode,std::string s)
 {
 	
 	
-	window.create(sf::VideoMode(1075, 1000), "Connect 4", sf::Style::Close, settings);
+	window.create(sf::VideoMode(1075, 1000), "Game", sf::Style::Close, settings);
 	
+	bool habPlayer = true;
+	bool habOtro = true;
 	playerName = s;
 	//for (int i = 1; i < 8; ++i)
 	//{
@@ -228,6 +249,13 @@ IaGUI::IaGUI(bool mode,std::string s)
 	cYellow.r = 214;
 	cYellow.g = 209;
 	cYellow.b = 7;
+
+	if (mode) {
+		player2 = "MOB0";
+	}
+	else {
+		player2 = "player 2";
+	}
 
 
 	if (!circleText.loadFromFile("sirculo.png"))
@@ -245,7 +273,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 	
 	player1 = playerName;
-	player2 = "PLAYER 2";
+	//player2 = "PLAYER 2";
 	int moveCount = 0;
 
 	char str[3];
@@ -302,7 +330,8 @@ IaGUI::IaGUI(bool mode,std::string s)
 				window.close();
 			
 			
-			if (moveCount == 42) win = 3;
+			//if (moveCount == 42) win = 3;
+			if (!movres()) win = 3;
 			
 			
 
@@ -347,44 +376,79 @@ IaGUI::IaGUI(bool mode,std::string s)
 					}
 				
 					//meterFicha2("Player 2: ", player2char);
-					if (win == 0 && turn == '1' && n > 0 && n < 8 && go && !mode && llena(n) == 0)
+					if (win == 0 && turn == '1' && n >= 0 && n < 8 && go && !mode && llena(n) == 0)
 					{
 
-						meterFicha2("Player 1: ", player2char, n, 0);
-						moveCount++;
-						
-						
-						//pintar2();
-
-
-						if (winCheckMapa(2) == 2) {
-							//printf("Has tenido suerte \n");
-							win = 2;
+						/*meterFicha2("Player 1: ", player2char, n, 0);
+						moveCount++;*/
+						if (n == 0 ) {
+							
+							if (habPlayer) {
+								borrarColumna(rand() % 6);
+								habPlayer = false;
+								habText2.setOutlineColor(sf::Color::Red);
+							}
+							else {
+								break;
+							}
 						}
-						//paintBoard();
-						/*paintBoard();
+						else {
 
-						changeTurn();*/
-						go = false;
+							meterFicha2("Player 1: ", player2char, n, 0);
+							moveCount++;
+
+							//pintar2();
+						}
+
+							if (winCheckMapa(2) == 2) {
+								//printf("Has tenido suerte \n");
+								win = 2;
+							}
+							//paintBoard();
+							/*paintBoard();
+
+							changeTurn();*/
+							go = false;
+						
 					}
 					
-					if (win == 0 && turn == '2' && n>0 && n<8 && go && llena(n) == 0)
+					if (win == 0 && turn == '2' && n >= 0 && n < 8 && go && llena(n) == 0)
 					{
-						
-						meterFicha2("Player 1: ", player1char, n, 0);
-						moveCount++;
-						
-						//pintar2();
 
-						if (winCheckMapa(1) == 1) {
-							//printf("Has tenido suerte \n");
-							win = 1;
+						/*meterFicha2("Player 1: ", player1char, n, 0);
+						moveCount++;*/
+
+						if (n == 0) {
+
+							if (habOtro) {
+								borrarColumna(rand() % 7 + 1);
+								habOtro = false;
+								habText1.setOutlineColor(sf::Color::Red);
+
+							}
+							else {
+								break;
+							}
 						}
-						//paintBoard();
-						/*paintBoard();
+						else {
+
+							meterFicha2("Player 1: ", player1char, n, 0);
+							moveCount++;
+
+						}
+
+							//pintar2();
+
+							if (winCheckMapa(1) == 1) {
+								//printf("Has tenido suerte \n");
+								win = 1;
+							}
+							//paintBoard();
+							/*paintBoard();
+
+							changeTurn();*/
+							go = false;
 						
-						changeTurn();*/
-						go = false;
 					}
 
 
@@ -434,7 +498,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 						str += "';";
 						result = str.c_str();
 
-						update(result);
+						updateBD(result);
 					}
 					else {
 	
@@ -447,7 +511,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 						str += "';";
 						result = str.c_str();
 
-						update(result);
+						updateBD(result);
 					}
 					score1.setString(std::to_string(onescore));
 					//std::cout << onescore << "\n";
@@ -473,7 +537,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 						str += "';";
 						result = str.c_str();
 
-						update(result);
+						updateBD(result);
 					}
 					else {
 
@@ -485,7 +549,7 @@ IaGUI::IaGUI(bool mode,std::string s)
 						str += "';";
 						result = str.c_str();
 
-						update(result);
+						updateBD(result);
 					}
 					score2.setString(std::to_string(twoscore));
 					added = true;
@@ -529,6 +593,10 @@ IaGUI::IaGUI(bool mode,std::string s)
 
 		window.draw(score1);
 		window.draw(score2);
+		if (!mode) {
+			window.draw(habText2);
+			window.draw(habText1);
+		}
 		window.draw(restart);
 		window.draw(restartText);
 		

@@ -65,6 +65,7 @@ int winCheckMapa(int i) {
 	int HEIGHT = 7;
 	int WIDTH = 7;
 	int EMPTY_SLOT = '0';
+	pintar2();
 	for (int r = 1; r < HEIGHT; r++) {
 		for (int c = 0; c < WIDTH; c++) {
 			int player = mapa[r][c];
@@ -235,7 +236,7 @@ bool movres() {
 
 	for (int i = 0; i < 7; i++) {
 
-		if (mapa[6][i] == '0')
+		if (mapa[1][i] == '0')
 			return true;
 	}
 
@@ -362,6 +363,28 @@ int NegaMax(int Depth) // MiniMax algorithm in NegaMax form
 		}
 	}
 	return -chance;
+
+}
+
+void borrarFila(int f) {
+
+	
+		for (int j = 0; j < 7; j++)
+		{
+			mapa[f][j] = '0';
+		}
+	
+}
+
+void borrarColumna(int c) {
+
+
+	for (int i = 1; i < 8; ++i)
+	{
+		
+			mapa[i][c] = '0';
+		
+	}
 
 }
 

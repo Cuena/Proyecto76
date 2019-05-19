@@ -8,9 +8,9 @@ void runOnlineGUI()
 	onlineGUI();
 }
 
-void runOnlineCMD()
+void runOnlineCMD(string s)
 {
-	Client2();
+	Client2 client(s);//cuidao
 }
 void runOptions() {
 
@@ -20,7 +20,7 @@ void runOptions() {
 MainMenu::MainMenu(std::string s)
 {
 
-	window.create(sf::VideoMode(1200, 1000), "Connect 4", sf::Style::Close);
+	window.create(sf::VideoMode(1200, 1000), "Main Menu", sf::Style::Close);
 	
 	
 	playerName = s;
@@ -41,12 +41,12 @@ MainMenu::MainMenu(std::string s)
 	//music.setVolume(50);
 	////music.play();
 
-	menuCircle.setRadius(15);
+	menuCircle.setRadius(10);
 	//menuCircle.setPointCount(300);
-	menuCircle.setOutlineThickness(-3);
-	menuCircle.setOutlineColor(sf::Color::Black);
+	menuCircle.setOutlineThickness(6);
+	menuCircle.setOutlineColor(sf::Color(24, 140, 124));
 
-	menuCircle.setPosition(window.getSize().x / 2 - 110 - 100, window.getSize().y / 2 - 100);
+	menuCircle.setPosition(window.getSize().x / 2 - 110 - 100, window.getSize().y / 2 - 100 -50);
 	//menuCircle.setPosition(screenWidth / 2 - getSize().x / 2, screenHeight / 2 - getSize().y / 2);
 	drawMenuItems();
 	
@@ -78,7 +78,7 @@ MainMenu::MainMenu(std::string s)
 					}
 					else if (selectedMenuItem == 2) {
 						
-						thread t1(runOnlineCMD);
+						thread t1(runOnlineCMD,playerName);
 						thread t2(runOnlineGUI);
 						t1.detach();
 						t2.detach();
@@ -154,36 +154,38 @@ void MainMenu::drawMenuItems()
 	menuTitle.setString("PROJECT 76");
 	menuTitle.setCharacterSize(60);
 	menuTitle.setPosition((window.getSize().x / 2.0f - menuTitle.getLocalBounds().width / 2.0f - 5), 100);
+	menuTitle.setOutlineColor(sf::Color(24, 140, 124));
+	menuTitle.setOutlineThickness(3);
 
 	menuPlayText.setFont(font);
 	menuPlayText.setString("PLAY VS PLAYER");
 	menuPlayText.setCharacterSize(30);
-	menuPlayText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f - 100);
+	menuPlayText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f - 100 - 50);
 
 	menuPlayIAText.setFont(font);
 	menuPlayIAText.setString("PLAY VS IA");
 	menuPlayIAText.setCharacterSize(30);
-	menuPlayIAText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f);
+	menuPlayIAText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f -50);
 
 	menuPlayOnlineText.setFont(font);
 	menuPlayOnlineText.setString("PLAY ONLINE");
 	menuPlayOnlineText.setCharacterSize(30);
-	menuPlayOnlineText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 100);
+	menuPlayOnlineText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 100 -50);
 
 	statsText.setFont(font);
 	statsText.setString("STATS");
 	statsText.setCharacterSize(30);
-	statsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 200);
+	statsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 200 -50);
 
 	menuOptionsText.setFont(font);
-	menuOptionsText.setString("OPTIONS");
+	menuOptionsText.setString("MUSIC");
 	menuOptionsText.setCharacterSize(30);
-	menuOptionsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 300);
+	menuOptionsText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 300 -50);
 
 	menuQuitText.setFont(font);
 	menuQuitText.setString("QUIT");
 	menuQuitText.setCharacterSize(30);
-	menuQuitText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 400);
+	menuQuitText.setPosition(window.getSize().x / 2.0f - 60 - 100, window.getSize().y / 2.0f + 400- 50);
 
 
 	if (!backTexture.loadFromFile("Black.jpg"))
